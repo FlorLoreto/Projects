@@ -1,0 +1,3 @@
+LISTA DE ARCHIVOS
+1. RGB_INTERRUPT.INO: Usa interrupciones para medir tiempos.
+2. SERIALMODE.INO: Prueba el Serial.
