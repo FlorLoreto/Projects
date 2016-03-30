@@ -51,8 +51,7 @@ void setup() {
   
  
 void loop() {
-  currentMillis = millis();//millis() mide el tiempo en milisegundos desde el comienzo del programa
-  
+   
   //Apago todos los colores
   analogWrite(redPin, 0);
   analogWrite(greenPin, 0);
@@ -62,7 +61,22 @@ void loop() {
   String greenState = "LOW";
   String blueState = "LOW";
   //Calling functions
-  switch (flag) {
+ blink();
+ 
+}
+//Function callback()
+void callback()
+{
+  k=k+1;
+  flag=k%6;
+  //0: red
+  //1:green
+  //2:blue
+   
+}
+//
+void blink(){
+switch (flag) {
     case 0:
       analogWrite(redPin, redInt);
       break;
@@ -85,16 +99,6 @@ void loop() {
       analogWrite(bluePin, blueInt^1);
     break;
   }
- 
-}
-//Function callback()
-void callback()
-{
-  k=k+1;
-  flag=k%6;
-  //0: red
-  //1:green
-  //2:blue
 }
 
 
