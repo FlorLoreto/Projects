@@ -19,7 +19,8 @@ int dutyCycle = 127;
 unsigned long currentMillis;
 unsigned long tiempoTranscurrido;
 int repeatTimes = 2;
-
+void(* resetFunc) () = 0;
+int volatile state=0;
 /*
   setup
 */
@@ -31,11 +32,18 @@ void setup()
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
   pinMode(buzzerPin, OUTPUT);
+  pinMode(switchPin, INPUT);
   Serial.begin(9600);
   /*
     Set date-time
   */
   setTime(18, 15, 0, 29, 3, 2016);
+  /*
+  switch
+  */
+  
+attachInterrupt(switchPin, resetFunc, RISING);
+
   // Start the chronometer on setup.
    Chrono myChrono(Chrono::SECONDS);
 }
@@ -46,8 +54,9 @@ void loop()
 {
   Alarm.alarmRepeat(18, 15, 5, Alarma);
  Serial.print("hora actual "); Serial.print(hour()); Serial.print(minute()); Serial.println(second());
-
-  Alarm.delay(0);//necessary
+state=digitalRead(switchPin);
+Serial.print("switichPin  ");Serial.println(state);
+ Alarm.delay(0);//necessary
 }
 
 

@@ -30,4 +30,4 @@ void blinkandBuzz() {
     Serial.print("me llaman. Voy al instante con mi bandera!  "); Serial.print(flag); Serial.println(second());
   } 
   noBlinkNoBuzz();
-}
+  }
