@@ -22,6 +22,7 @@ Serial.begin(9600);
 }
 
 void loop() {
+  wdt_reset();
   // put your main code here, to run repeatedly:
 analogWrite(buzzerPin, 56);
 digitalWrite(ledPin, HIGH);
