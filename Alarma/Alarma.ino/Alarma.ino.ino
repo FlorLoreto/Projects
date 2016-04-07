@@ -24,17 +24,6 @@ const int redInt = 254;
 const int greenInt = 254;
 const int blueInt = 255;
 
-//C) El tiempo de encendido de cada color en milisegundos:
-
-int redMil = 1000;
-int greenMil = 1000;
-int blueMil = 5000;
-
-//D) El tiempo de apagado em milisegundos
-
-int apagaLed = 5000;
-unsigned long currentMillis;
-unsigned long previousMillis;
 //E) la variable volátil para intercambiar;
 volatile int flag;
 int k=0;
@@ -42,31 +31,15 @@ int k=0;
 
 void setup() {
 
-  Serial.begin(9600);
-  pinMode(redPin, OUTPUT);
-  pinMode(greenPin, OUTPUT);
-  pinMode(bluePin, OUTPUT);
-  Timer1.initialize(2000000);         // initialize timer1, and set a 1 second period
-  Timer1.attachInterrupt(callback);  // attaches callback() as a timer overflow interrupt
+   // attaches callback() as a timer overflow interrupt
 }
   
  
-void loop() {
-   
-  //Apago todos los colores
-  analogWrite(redPin, 0);
-  analogWrite(greenPin, 0);
-  analogWrite(bluePin, 0);
-  //indico que están apagados
-  String redState = "LOW";
-  String greenState = "LOW";
-  String blueState = "LOW";
-  //Calling functions
- blink();
- //buzz();
  
-}
-//Function callback()
+  //Apago todos los colores
+  
+  //Calling functions
+ //Function callback()
 void callback()
 {
   k=k+1;
@@ -77,7 +50,7 @@ void callback()
    
 }
 //
-void blink(){
+void Alarma(){
 switch (flag) {
     case 0:
       analogWrite(redPin, redInt);
@@ -115,31 +88,4 @@ switch (flag) {
     break;
   }
 }
-void buzz(){
-switch (flag) {
-    case 0:
-      analogWrite(buzzPin, 0);
-      break;
-    case 1:
-      analogWrite(buzzPin, 255);
-      break;
-    case 2:
-      analogWrite(buzzPin, 0);
-      break;
-     case 3:
-      analogWrite(buzzPin, 127);
-      break;
-     case 4:
-     analogWrite(buzzPin, 0);
-      break;
-     case 5:
-     analogWrite(buzzPin, 66);
-      break;
-    default: 
-      analogWrite(bluePin, blueInt^1);
-    break;
-  }
-}
-
-
 

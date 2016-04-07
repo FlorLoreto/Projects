@@ -10,7 +10,6 @@ int redPin = 9;
 int greenPin = 10;
 int bluePin = 11;
 //El tiempo de encendido de cada color en milisegundos:
-
 volatile int flag;//Volatile directs the compiler to load the variable from RAM and not from a storage register, which is a temporary memory location 
 //where program variables are stored and manipulated. Under certain conditions, the value for a variable stored in registers can be inaccurate.
 int k = 0;

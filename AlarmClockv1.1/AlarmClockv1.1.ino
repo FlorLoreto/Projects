@@ -1,12 +1,11 @@
 
-
 /* DATE: 06-04-2016
 ************  This program sets the calendar, time and alarms ************/
 //===== Libraries included ======================================
 #include <Time.h>
 #include <TimeAlarms.h>
-#include <avr/wdt.h>
 #include <TimerOne.h>
+
 //=====  Variables ==============================================
 int dia = 0;
 int mes = 0;
@@ -33,6 +32,23 @@ unsigned long currentMillis;
 unsigned long previousMillis = 0;
 unsigned long intervalo = 3000;
 String respuesta = "";
+const int redPin = 9;
+const int  greenPin = 10;
+const int  bluePin = 11;
+const int  buzzerPin = 3;
+const int  switchPin = 2;
+const int redInt = 254;
+const int greenInt = 254;
+const int blueInt = 255;
+//C) El tiempo de encendido de cada color en milisegundos:
+int redMil = 1000;
+int greenMil = 1000;
+int blueMil = 5000;
+//D) El tiempo de apagado em milisegundos
+int apagaLed = 5000;
+//E) la variable volátil para intercambiar;
+volatile int flag;
+int k=0;
 
 //=== function1 to print the command list:  ===========================
 void printHelp1() {
@@ -111,26 +127,7 @@ void stringtoNumber(String instruct) {
     alarmMinuto = mm.toInt();
   }
 }
-//=== function alarm Service : ================================================
-//A) Nº de los puertos conectados a los pines.
-const int redPin = 9;
-const int greenPin = 10;
-const int bluePin = 11;
-const int buzzPin = 3;
-
-//B) Las intensidades de cada color dadas por el ciclo de trabajo del PWM
-
-const int redInt = 254;
-const int greenInt = 254;
-const int blueInt = 255;
-
-//E) la variable volátil para intercambiar;
-volatile int flag;
-int k=0;
-  //Apago todos los colores
-  
-  //Calling functions
- //Function callback()
+//===== function callback() :  ====================
 void callback()
 {
   k=k+1;
@@ -138,41 +135,30 @@ void callback()
   //0: red
   //1:green
   //2:blue
-   
-}
-//
-void Alarma(){
+ }
+//=====  function blink the LEDS =====================
+void blink(){
 switch (flag) {
     case 0:
       analogWrite(redPin, redInt);
-      analogWrite(buzzPin, 0);
       break;
     case 1:
       analogWrite(redPin, 0);
-      analogWrite(greenPin, 0);
-      analogWrite(bluePin, 0);
-       analogWrite(buzzPin, 255);
-    break;
+      analogWrite(buzzerPin, 127);
+      break;
     case 2:
       analogWrite(greenPin, greenInt);
-      analogWrite(buzzPin, 0);
       break;
      case 3:
-      analogWrite(redPin, 0);
       analogWrite(greenPin, 0);
-      analogWrite(bluePin, 0);
-      analogWrite(buzzPin, 127);
-     break;
+      analogWrite(buzzerPin, 127);
+      break;
      case 4:
       analogWrite(bluePin, blueInt);
-      analogWrite(buzzPin, 0);
       break;
      case 5:
-      analogWrite(redPin, 0);
-      analogWrite(greenPin, 0);
       analogWrite(bluePin, 0);
-      analogWrite(buzzPin, 65);
-      
+      analogWrite(buzzerPin, 127);
       break;
     default: 
       analogWrite(bluePin, blueInt^1);
@@ -180,12 +166,42 @@ switch (flag) {
   }
 }
 
+//=== function alarm Service : ==================================
+void Alarma() {
+  Serial.println("me toca sonar la alarma");
+  // 1ª Parte: declaración de variables
+// Las intensidades de cada color dadas por el ciclo de trabajo del PWM
+
+  //Calling functions
+ if (currentMillis - previousMillis >= 20*intervalo) {
+ previousMillis = currentMillis;
+ blink();
+}
+  //Apago todos los colores
+  analogWrite(redPin, 0);
+  analogWrite(greenPin, 0);
+  analogWrite(bluePin, 0);
+  //indico que están apagados
+  String redState = "LOW";
+  String greenState = "LOW";
+  String blueState = "LOW";
+}
+//========= ISR push button ================================
+
+  void Reset()
+{
+  analogWrite(redPin, 0);
+  analogWrite(greenPin, 0);
+  analogWrite(bluePin, 0);
+  analogWrite(buzzerPin, 0);
+
+}
+
 //---------------- setup ---------------------------------------------
 void setup() {
 
   while (!Serial);
   setTime(0, 0, 0, 1, 1, 1970);
-  wdt_disable(); // Desactivar el watchdog
   Serial.begin(9600);   // Open serial port (9600 bauds).
   printHelp1();          // Print the command list.
   Serial.println ("comienzo el esto ");
@@ -194,19 +210,38 @@ void setup() {
   Serial.print ("hora inicial "); Serial.printf ("%d:%d:%d.\n", hour(), minute(), second());
   printHelp3();
   Serial.print ("alarma inicial "); Serial.printf ("%d:%d:%d.\n", 0, 0, 0);
-  Serial.begin(9600);
   pinMode(redPin, OUTPUT);
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
-  Timer1.initialize(2000000);         // initialize timer1, and set a 1 second period
+  pinMode(buzzerPin, OUTPUT);
+  //free pins and switchPin are turned into Pull-up mode
+  pinMode(!redPin && !greenPin && !bluePin && !buzzerPin, INPUT_PULLUP);
+  //analog pins turned into pull-up mode too
+  for (int r = A0; r <= A5; r++) {
+    digitalWrite(r, HIGH);
+    attachInterrupt(digitalPinToInterrupt(switchPin), Reset, CHANGE);
+  }
+  Timer1.initialize(1000000); //cada segundo
   Timer1.attachInterrupt(callback); 
-  analogWrite(redPin, 0);
-  analogWrite(greenPin, 0);
-  analogWrite(bluePin, 0);
-  //indico que están apagados
-  String redState = "LOW";
-  String greenState = "LOW";
-  String blueState = "LOW";
+  // initialize timer1, and set a 1 second interval
+  // initialize Timer1
+  cli();          // disable global interrupts
+  TCCR1A = 0;     // set entire TCCR1A register to 0
+  TCCR1B = 0;     // same for TCCR1B
+
+  // set compare match register to desired timer count:
+  OCR1A = 15624;
+
+  // turn on CTC mode:
+  TCCR1B |= (1 << WGM12);
+
+  // Set CS10 and CS12 bits for 1024 prescaler:
+  TCCR1B |= (1 << CS10);
+  TCCR1B |= (1 << CS12);
+
+  // enable timer compare interrupt:
+  TIMSK1 |= (1 << OCIE1A);
+  sei();          // enable global interrupts
 
 }
 //---------------- loop ---------------------------------------------
@@ -218,11 +253,13 @@ void loop() {
     stringtoNumber(serialData);
     setTime(hora, minuto, segundo, dia, mes, anyo);
   }
- /* Alarm.alarmRepeat(dowMonday, alarmHora, alarmMinuto, 10, Alarma);
+  Alarm.alarmRepeat(dowMonday, alarmHora, alarmMinuto, 10, Alarma);
   Alarm.alarmRepeat(dowTuesday, alarmHora, alarmMinuto, 10, Alarma);
   Alarm.alarmRepeat(dowWednesday, alarmHora, alarmMinuto, 10, Alarma);
   Alarm.alarmRepeat(dowThursday, alarmHora, alarmMinuto, 10, Alarma);
-  Alarm.alarmRepeat(dowFriday, alarmHora, alarmMinuto, 10, Alarma);*/
+  Alarm.alarmRepeat(dowFriday, alarmHora, alarmMinuto, 10, Alarma);
+
+
   if (currentMillis - previousMillis >= intervalo) {
 
     previousMillis = currentMillis;

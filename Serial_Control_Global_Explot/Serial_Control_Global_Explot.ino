@@ -7,7 +7,10 @@
 #include <TimeAlarms.h>
 #include <avr/wdt.h>
 #include <TimerOne.h>
+#include <CountUpDownTimer.h>
 //=====  Variables ==============================================
+CountUpDownTimer T(DOWN);
+CountUpDownTimer T1(DOWN);
 int dia = 0;
 int mes = 0;
 int anyo = 0;
@@ -16,6 +19,7 @@ int minuto = 0;
 int segundo = 0;
 int alarmMinuto = 0;
 int alarmHora = 0;
+int alarmSegundo = 5;
 String DD;
 String MM;
 String AAAA;
@@ -33,6 +37,20 @@ unsigned long currentMillis;
 unsigned long previousMillis = 0;
 unsigned long intervalo = 3000;
 String respuesta = "";
+const int redPin = 9;
+const int greenPin = 10;
+const int bluePin = 11;
+const int buzzPin = 3;
+
+//B) Las intensidades de cada color dadas por el ciclo de trabajo del PWM
+
+const int redInt = 254;
+const int greenInt = 254;
+const int blueInt = 255;
+
+//E) la variable volátil para intercambiar;
+volatile int flag;
+int k=0;
 
 //=== function1 to print the command list:  ===========================
 void printHelp1() {
@@ -111,81 +129,69 @@ void stringtoNumber(String instruct) {
     alarmMinuto = mm.toInt();
   }
 }
-//=== function alarm Service : ================================================
-//A) Nº de los puertos conectados a los pines.
-const int redPin = 9;
-const int greenPin = 10;
-const int bluePin = 11;
-const int buzzPin = 3;
 
-//B) Las intensidades de cada color dadas por el ciclo de trabajo del PWM
-
-const int redInt = 254;
-const int greenInt = 254;
-const int blueInt = 255;
-
-//E) la variable volátil para intercambiar;
-volatile int flag;
-int k=0;
-  //Apago todos los colores
-  
-  //Calling functions
- //Function callback()
-void callback()
-{
-  k=k+1;
-  flag=k%6;
-  //0: red
-  //1:green
-  //2:blue
-   
-}
-//
+//=== function alarm Service : ===========================================
 void Alarma(){
-switch (flag) {
-    case 0:
+  Serial.println ("Pasaba por aqui y me dije....Alarma!"); 
+  Serial.print ("millis()");Serial.println (millis()); 
+ interrupts();
+ Timer1.initialize(1000000);  
+ Timer1.attachInterrupt(callback); 
+ flag=0;
+     
+}
+void callback(){
+    ++flag;
+    if (flag<20){
       analogWrite(redPin, redInt);
-      analogWrite(buzzPin, 0);
-      break;
-    case 1:
+      analogWrite(buzzPin, 127);
+            //delay (500);}
+    }else{
+    analogWrite(redPin, 0);
+    analogWrite(buzzPin, 0);
+    noInterrupts();}
+}
+
+
+  /*   if (T.TimeHasChanged() ) // this prevents the time from being constantly shown.
+  {  
       analogWrite(redPin, 0);
       analogWrite(greenPin, 0);
       analogWrite(bluePin, 0);
-       analogWrite(buzzPin, 255);
-    break;
-    case 2:
+      analogWrite(buzzPin, 255);
+  }
+   if (T.TimeHasChanged() ) // this prevents the time from being constantly shown.
+  {
       analogWrite(greenPin, greenInt);
-      analogWrite(buzzPin, 0);
-      break;
-     case 3:
+      analogWrite(buzzPin, 0);}
+   if (T.TimeHasChanged() ) // this prevents the time from being constantly shown.
+  {
       analogWrite(redPin, 0);
       analogWrite(greenPin, 0);
       analogWrite(bluePin, 0);
       analogWrite(buzzPin, 127);
-     break;
-     case 4:
+      }
+   if (T.TimeHasChanged() ) // this prevents the time from being constantly shown.
+  {
+     
       analogWrite(bluePin, blueInt);
-      analogWrite(buzzPin, 0);
-      break;
-     case 5:
+      analogWrite(buzzPin, 0);}
+      
+       if (T.TimeHasChanged() ) // this prevents the time from being constantly shown.
+  {
       analogWrite(redPin, 0);
       analogWrite(greenPin, 0);
       analogWrite(bluePin, 0);
       analogWrite(buzzPin, 65);
-      
-      break;
-    default: 
-      analogWrite(bluePin, blueInt^1);
-    break;
-  }
-}
-
+  }*/
+   
+  
+    
 //---------------- setup ---------------------------------------------
 void setup() {
-
   while (!Serial);
   setTime(0, 0, 0, 1, 1, 1970);
-  wdt_disable(); // Desactivar el watchdog
+   wdt_disable(); // Desactivar el watchdog
   Serial.begin(9600);   // Open serial port (9600 bauds).
   printHelp1();          // Print the command list.
   Serial.println ("comienzo el esto ");
@@ -194,44 +200,47 @@ void setup() {
   Serial.print ("hora inicial "); Serial.printf ("%d:%d:%d.\n", hour(), minute(), second());
   printHelp3();
   Serial.print ("alarma inicial "); Serial.printf ("%d:%d:%d.\n", 0, 0, 0);
-  Serial.begin(9600);
   pinMode(redPin, OUTPUT);
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
   Timer1.initialize(2000000);         // initialize timer1, and set a 1 second period
-  Timer1.attachInterrupt(callback); 
   analogWrite(redPin, 0);
   analogWrite(greenPin, 0);
   analogWrite(bluePin, 0);
-  //indico que están apagados
-  String redState = "LOW";
-  String greenState = "LOW";
-  String blueState = "LOW";
-
+  T.SetTimer(0,0,10);
+  T.StartTimer();
+  
+ T1.SetTimer(0,0,10);
+  T1.StartTimer();
+ 
+  
 }
 //---------------- loop ---------------------------------------------
 
 void loop() {
-  currentMillis = millis();
+  T.Timer();
   while ((Serial.available()) && (dia == 0 && mes == 0 && anyo == 0) || (hora == 0 && minuto == 0 && segundo == 0) || (alarmHora == 0 && alarmMinuto == 0)) {
     getEntry(&serialData, &primerNumero);
     stringtoNumber(serialData);
     setTime(hora, minuto, segundo, dia, mes, anyo);
   }
- /* Alarm.alarmRepeat(dowMonday, alarmHora, alarmMinuto, 10, Alarma);
-  Alarm.alarmRepeat(dowTuesday, alarmHora, alarmMinuto, 10, Alarma);
-  Alarm.alarmRepeat(dowWednesday, alarmHora, alarmMinuto, 10, Alarma);
-  Alarm.alarmRepeat(dowThursday, alarmHora, alarmMinuto, 10, Alarma);
-  Alarm.alarmRepeat(dowFriday, alarmHora, alarmMinuto, 10, Alarma);*/
-  if (currentMillis - previousMillis >= intervalo) {
-
-    previousMillis = currentMillis;
-    Serial.print ("\nserialData\t"); Serial.println (serialData);
+ 
+  Alarm.alarmRepeat(dowMonday, alarmHora, alarmMinuto,  alarmSegundo, Alarma);
+  Alarm.alarmRepeat(dowTuesday, alarmHora, alarmMinuto,  alarmSegundo, Alarma);
+  Alarm.alarmRepeat(dowWednesday, alarmHora, alarmMinuto,  alarmSegundo, Alarma);
+  Alarm.alarmRepeat(dowThursday, alarmHora, alarmMinuto,  alarmSegundo, Alarma);
+  Alarm.alarmRepeat(dowFriday, alarmHora, alarmMinuto,  alarmSegundo, Alarma); 
+  
+  if (T.TimeHasChanged() ) // this prevents the time from being constantly shown.
+  {  Serial.print ("\nserialData\t"); Serial.println (serialData);
     Serial.printf ("Fecha: %d-%d-%d. Hora: %d:%d:%d\n", day(), month(), year(), hour(), minute(), second());
-    Serial.printf ("Alarma: %d:%d\n", alarmHora, alarmMinuto);
-  }
+    Serial.printf ("Alarma: %d:%d:%d\n", alarmHora, alarmMinuto,10);
+    Serial.print("Alarma ");Serial.println( Alarm.alarmRepeat(dowThursday, alarmHora, alarmMinuto,  alarmSegundo, Alarma));
+
+    }
   else {
     Serial.print("");
   }
-  Alarm.delay(0);
+ 
+ Alarm.delay(0);
 }
