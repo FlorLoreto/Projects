@@ -88,13 +88,13 @@ void getEntry(String *devol1, int *devol2) {
       *devol2 = salida[0] - '0';
       switch (*devol2) {
         case 1 :
-          Serial.println("datos de fecha");
+          Serial.print("datos de fecha: ");Serial.println(salida.substring(1,3)+"-"+salida.substring(3,5)+"-"+salida.substring(5,9));
           break;
         case 2 :
-          Serial.println("datos de hora");
+          Serial.print("datos de hora: ");Serial.println(salida.substring(1,3)+":"+salida.substring(3,5)+":"+salida.substring(5,7));
           break;
         case 3 :
-          Serial.println("datos de alarma");
+          Serial.print ("datos de alarma: ");Serial.println(salida.substring(1,3)+":"+salida.substring(3,5));
           break;
       }
     }

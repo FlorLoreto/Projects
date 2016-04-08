@@ -5,12 +5,8 @@
 //===== Libraries included ======================================
 #include <Time.h>
 #include <TimeAlarms.h>
-#include <avr/wdt.h>
 #include <TimerOne.h>
-#include <CountUpDownTimer.h>
 //=====  Variables ==============================================
-CountUpDownTimer T(DOWN);
-CountUpDownTimer T1(DOWN);
 int dia = 0;
 int mes = 0;
 int anyo = 0;
@@ -191,7 +187,6 @@ void callback(){
 void setup() {
   while (!Serial);
   setTime(0, 0, 0, 1, 1, 1970);
-   wdt_disable(); // Desactivar el watchdog
   Serial.begin(9600);   // Open serial port (9600 bauds).
   printHelp1();          // Print the command list.
   Serial.println ("comienzo el esto ");
@@ -218,7 +213,6 @@ void setup() {
 //---------------- loop ---------------------------------------------
 
 void loop() {
-  T.Timer();
   while ((Serial.available()) && (dia == 0 && mes == 0 && anyo == 0) || (hora == 0 && minuto == 0 && segundo == 0) || (alarmHora == 0 && alarmMinuto == 0)) {
     getEntry(&serialData, &primerNumero);
     stringtoNumber(serialData);
