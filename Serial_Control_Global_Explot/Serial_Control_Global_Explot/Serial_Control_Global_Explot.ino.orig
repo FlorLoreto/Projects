@@ -17,9 +17,6 @@ int segundo = 0;
 int alarmMinuto = 0;
 int alarmHora = 0;
 int alarmSegundo = 5;
-int alMinutoDia;
-int alHoraDia;
-int alSegDia;
 String DD;
 String MM;
 String AAAA;
@@ -41,7 +38,6 @@ const int redPin = 9;
 const int greenPin = 10;
 const int bluePin = 11;
 const int buzzPin = 3;
-const int desfase=01;
 
 //B) Las intensidades de cada color dadas por el ciclo de trabajo del PWM
 
@@ -51,8 +47,7 @@ const int blueInt = 255;
 
 //E) la variable volátil para intercambiar;
 volatile int flag = 0;
-//int k = 0;
-int kD = 0;
+int k = 0;
 
 //=== function1 to print the command list:  ===========================
 void printHelp1() {
@@ -93,6 +88,15 @@ void getEntry(String *devol1, int *devol2) {
       *devol2 = salida[0] - '0';
       switch (*devol2) {
         case 1 :
+<<<<<<< HEAD
+          Serial.println("datos de fecha");
+          break;
+        case 2 :
+          Serial.println("datos de hora");
+          break;
+        case 3 :
+          Serial.println("datos de alarma");
+=======
           Serial.print("datos de fecha: ");Serial.println(salida.substring(1,3)+"-"+salida.substring(3,5)+"-"+salida.substring(5,9));
           break;
         case 2 :
@@ -100,6 +104,7 @@ void getEntry(String *devol1, int *devol2) {
           break;
         case 3 :
           Serial.print ("datos de alarma: ");Serial.println(salida.substring(1,3)+":"+salida.substring(3,5));
+>>>>>>> Seria_Control_Global_Explot funciona
           break;
       }
     }
@@ -130,20 +135,14 @@ void stringtoNumber(String instruct) {
     alarmHora = hh.toInt();
     alarmMinuto = mm.toInt();
   }
-  alMinutoDia = alarmMinuto;
-alHoraDia = alarmHora;
-alSegDia = alarmSegundo+desfase;
-
 }
 
 //=== function alarm Service : ===========================================
-/*void Alarma() {
+void Alarma() {
   Serial.println ("Pasaba por aqui y me dije....Alarma!");
-  Timer1.detachInterrupt();
   interrupts();
   Timer1.initialize(1000000);
   Timer1.attachInterrupt(callback);
-  
 }
 void callback() {
   k = k + 1; Serial.print ("  k "); Serial.println(k); Serial.print (";  flag "); Serial.print(flag);
@@ -172,55 +171,14 @@ void callback() {
   }
   else {
     Timer1.detachInterrupt();
-    noInterrupts();
     digitalWrite(greenPin, 0);
      digitalWrite(bluePin, 0);
     digitalWrite(redPin, 0);
     analogWrite(buzzPin, 0);
     k = 0;
   }
-  }*/
-  void ALMD() {
-  Serial.println ("Pasaba por aqui y me dije es el dia de las Alarmas!");
-  //Timer1.detachInterrupt();
-  interrupts();
-  Timer1.initialize(1000000);
-  Timer1.attachInterrupt(llamaD);
-}
-void llamaD() {
-  kD = kD + 1; Serial.print ("  kD "); Serial.println(kD); Serial.print (";  flag "); Serial.print(flag);
-  if (kD <= 5) {
-    digitalWrite(redPin, redInt);
-    analogWrite(buzzPin, 127);
   }
-  else if (kD > 5 && kD <= 6) {
-    digitalWrite(redPin, redInt / 2); digitalWrite(greenPin, greenInt / 2);
-    analogWrite(buzzPin, 0);
-  }
-  else if (kD > 6 && kD <= 11) {
-    digitalWrite(greenPin, greenInt);
-    digitalWrite(redPin, 0);
-    analogWrite(buzzPin, 34);
-  }
-  else if (kD > 11 && kD <= 13) {
-    digitalWrite(greenPin, greenInt / 2); digitalWrite(bluePin, blueInt / 2);
-    digitalWrite(redPin, 0);
-    analogWrite(buzzPin, 0);
-  }
-  else if (kD > 13 && kD <= 18) {
-    digitalWrite(bluePin, greenInt);
-    digitalWrite(greenPin, 0);
-    analogWrite(buzzPin, 205);
-  }
-  else {
-    Timer1.detachInterrupt();
-    digitalWrite(greenPin, 0);
-     digitalWrite(bluePin, 0);
-    digitalWrite(redPin, 0);
-    analogWrite(buzzPin, 0);
-    kD = 0;
-  }
-  }
+
 //---------------- setup ---------------------------------------------
 void setup() {
   while (!Serial);
@@ -241,12 +199,12 @@ void setup() {
   digitalWrite(redPin, 0);
   digitalWrite(greenPin, 0);
   digitalWrite(bluePin, 0);
-  /*Alarm.alarmRepeat(dowMonday, alarmHora, alarmMinuto,  alarmSegundo, Alarma);
+  Alarm.alarmRepeat(dowMonday, alarmHora, alarmMinuto,  alarmSegundo, Alarma);
   Alarm.alarmRepeat(dowTuesday, alarmHora, alarmMinuto,  alarmSegundo, Alarma);
   Alarm.alarmRepeat(dowWednesday, alarmHora, alarmMinuto,  alarmSegundo, Alarma);
   Alarm.alarmRepeat(dowThursday, alarmHora, alarmMinuto,  alarmSegundo, Alarma);
-  Alarm.alarmRepeat(dowFriday, alarmHora, alarmMinuto,  alarmSegundo, Alarma);*/
-  Alarm.alarmRepeat(alHoraDia,alMinutoDia,alSegDia, ALMD);
+  Alarm.alarmRepeat(dowFriday, alarmHora, alarmMinuto,  alarmSegundo, Alarma);
+
 }
 //---------------- loop ---------------------------------------------
 
@@ -266,11 +224,12 @@ void loop() {
     Serial.print ("\nserialData\t"); Serial.println (serialData);
     Serial.printf ("Fecha: %d-%d-%d. Hora: %d:%d:%d\n", day(), month(), year(), hour(), minute(), second());
     Serial.printf ("Alarma: %d:%d:%d\n", alarmHora, alarmMinuto, 10);
-    Serial.printf ("Alarma diaria: %d:%d:%d\n", alHoraDia, alMinutoDia, alSegDia);
+    Serial.print("Alarma "); Serial.println( Alarm.alarmRepeat(dowFriday, alarmHora, alarmMinuto,  alarmSegundo, Alarma));
+
   }
   else {
     Serial.print("");
   }
 
-  Alarm.delay(10);
+  Alarm.delay(0);
 }
