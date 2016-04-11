@@ -1,0 +1,704 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\options fleqn,liststotoc,bibtotoc,idxtotoc,BCOR7.5mm,titlepage,tablecaptionabove
+\use_default_options false
+\begin_modules
+logicalmkup
+theorems-starred
+endnotes
+hanging
+minimalistic
+eqs-within-sections
+figs-within-sections
+tabs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\begin_local_layout
+Format 7
+InsetLayout CharStyle:MenuItem
+LyxType               charstyle
+LabelString           menu
+LatexType             command
+LatexName             menuitem
+Font
+Family              Sans
+EndFont
+Preamble
+\newcommand*{\menuitem}[1]{{\sffamily #1}}
+EndPreamble
+End
+\end_local_layout
+\language british
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement h
+\paperfontsize 12
+\spacing single
+\use_hyperref true
+\pdf_title "Manual Personalización de LyX"
+\pdf_author "Equipo LyX"
+\pdf_subject "LyX-documentation Customization"
+\pdf_keywords "LyX, documentation, customization"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen true
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle false
+\pdf_quoted_options "linkcolor=black, citecolor=black, urlcolor=blue, filecolor=blue,pdfpagelayout=OneColumn, pdfnewwindow=true,pdfstartview=XYZ, plainpages=false, pdfpagelabels"
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 0
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\branch OutDated
+\selected 0
+\filename_suffix 0
+\color #ffffff
+\end_branch
+\index Índice
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2.5cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle plain
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Requirements Specification for 
+\emph on
+the development of an alarm clock 
+\emph default
+as phase 1 of the Internet of Things
+\end_layout
+
+\begin_layout Author
+Rafael Pereira del Estal
+\end_layout
+
+\begin_layout Date
+March, 2017
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+According to the IEEE a 
+\series bold
+\emph on
+Requirements Specification Document
+\series default
+\emph default
+ clearly and accurately describes each of the essential requirements (functions,
+ performance, design constraints, and quality attributes) of the system
+ and its external interfaces.
+\end_layout
+
+\begin_layout Standard
+Each requirement must be described in such a way that it is feasible and
+ objectively verifiable by a prescribed method (e.g., by inspection, demonstration
+, analysis, or test).
+\end_layout
+
+\begin_layout Standard
+This document is the basis for contractual agreements between contractors
+ or suppliers and customers.
+\end_layout
+
+\begin_layout Standard
+Since specifications are intended to a diverse audience - customers and
+ users for validation, contract..., systems (requirements) analysts, developers,
+ programmers to implement the system, testers to check that the requirements
+ have been met , project managers to measure and control the project - different
+ levels of detail and formality is needed for each audience.
+\end_layout
+
+\begin_layout Subsection
+Purpose
+\end_layout
+
+\begin_layout Standard
+The purpose of this document is to present a detailed description of the
+ Alarm Clock prototype developed in the phase 1 of the project “The Internet
+ of Things” .
+ It will explain : 
+\end_layout
+
+\begin_layout Itemize
+the purpose and features of the system, 
+\end_layout
+
+\begin_layout Itemize
+the interfaces of the system, 
+\end_layout
+
+\begin_layout Itemize
+what the system will do, 
+\end_layout
+
+\begin_layout Itemize
+the constraints under which it must operate and 
+\end_layout
+
+\begin_layout Itemize
+how the system will react to external stimuli.
+ 
+\end_layout
+
+\begin_layout Subsection
+Scope of Project
+\end_layout
+
+\begin_layout Standard
+The system is a prototype of a microcontroller based alarm clock (MBAC)
+ developed with the ARDUINO UNO board and the Wi-Fi Shield.
+\end_layout
+
+\begin_layout Standard
+This system has been designed to gain experience with the development tools
+ provided by the ARDUINO platform in such a way that the developing staff
+ will be able to face the bigger project which is the object of this thesis.
+ So, its goal is not to make a neat and streamlined prototype, but rather
+ implement as many solution variants as possible within the required time
+ limits.
+\end_layout
+
+\begin_layout Standard
+From a functional perspective, this system is designed as an alarm clock
+ that can be set manually to the current date and time and will accept the
+ scheduling of alarms for the working days of the week and different ones
+ on Saturday and Sunday.
+ 
+\end_layout
+
+\begin_layout Standard
+The system will be set via a USB/Wi-Fi connection with a PC and will show
+ the date, time and alarm status on a LCD.
+ 
+\end_layout
+
+\begin_layout Standard
+Of course, when the alarm time arrives, the clock will buzz and emit light
+ for a period of time to announce the event.
+ 
+\end_layout
+
+\begin_layout Subsection
+Glossary
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Term
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Definition
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\emph on
+Actor 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Person who reads the time of day on the system display but does 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+not use its alarm functionality
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\emph on
+User 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Person who is responsible for the proper functioning of the system.
+ 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+He uses its alarm functionality
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\emph on
+LCD
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+System driven Liquid Crystal Display which shows date and time.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+\emph on
+PC
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Personal Computer
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+References
+\end_layout
+
+\begin_layout Enumerate
+IEEE.
+ IEEE Std 830-1998 IEEE Recommended Practice for Software Requirements Specifica
+tions.
+ IEEE Computer Society, 1998.
+ 
+\end_layout
+
+\begin_layout Subsection
+Overview of Document
+\end_layout
+
+\begin_layout Standard
+The next chapter, the Overall Description section, of this document gives
+ an overview of the functionality of the prototype and describes the informal
+ requirements It id used to establish a context for the technical requirements
+ specification in the next chapter.
+\end_layout
+
+\begin_layout Standard
+The third chapter, Requirements Specification section, of this document
+ is written primarily for the developers and describes in technical terms
+ the details of the functionality of the product.
+ Both sections of the document describe the same product in its entirety,
+ but are intended for different audiences and thus use different language.
+ 
+\end_layout
+
+\begin_layout Section
+Overall Description 
+\end_layout
+
+\begin_layout Subsection
+System Environment
+\end_layout
+
+\begin_layout Standard
+The Alarm Clock prototype may have two main active actors and one cooperating
+ system.
+ The alarm user sets its parameters and senses the acoustical and visual
+ signals to remember some tasks to perform, such as waking up.
+ The clock is always showing the current date and time what can be used
+ as useful information for many agents who may not be interested in alarms.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename Overall1.png
+	scale 45
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Functional Requirements Specification
+\end_layout
+
+\begin_layout Standard
+This section outlines the use cases for each of the actors separately.
+ The 'agents' have only one use case apiece while the 'user' is main actor
+ in this system.
+\end_layout
+
+\begin_layout Subsubsection
+Actor Use Case
+\end_layout
+
+\begin_layout Standard
+Use case: 
+\series bold
+Watch the time: 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Diagram:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename function1.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Brief Description
+\series default
+ :The 
+\emph on
+Actor
+\emph default
+ watches the LCD to find out the the time of the day.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Initial Step-By-Step Description:
+\series default
+ Before this use case can be initiated, the user has already turned on the
+ device and, probably, set the date and time.
+\end_layout
+
+\begin_layout Standard
+The Agent looks at the LCD to find out the time of day.
+\end_layout
+
+\begin_layout Standard
+The system displays its date and time.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename func2.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+Date/Time watch process
+\emph default
+ state-transition diagram summarizes the use cases listed below.
+ The system updates the date/time displayed by the LCD.
+ The Actor looks at the screen reads the information displayed.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+User Use cases
+\end_layout
+
+\begin_layout Standard
+Use case: 
+\series bold
+Reset system
+\series default
+: 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Diagram:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename reset/pegado1.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Brief Description
+\series default
+ :The 
+\emph on
+User 
+\emph default
+pushes the 
+\emph on
+Reset
+\emph default
+ button.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Initial Step-By-Step Description:
+\series default
+ Before this use case can be initiated, the user has already turned on the
+ device and, probably, set the date and time.
+\end_layout
+
+\begin_layout Standard
+Use case: 
+\series bold
+Set Date/Time/Alarms
+\series default
+: 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Diagram:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename setala.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Brief Description
+\series default
+ :The 
+\emph on
+User 
+\emph default
+from a PC sets DD-MM-AAAA, HH:MM:SS and alarm parameters from the system.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Initial Step-By-Step Description:
+\series default
+ Before this use case can be initiated, the user has already turned on the
+ device and, probably, set the date and time.
+\end_layout
+
+\begin_layout Standard
+The Agent looks at the LCD to find out the time of day.
+\end_layout
+
+\begin_layout Standard
+The system displays its date and time.
+\end_layout
+
+\begin_layout Standard
+Use case: 
+\series bold
+Enable Alarms
+\series default
+: 
+\end_layout
+
+\begin_layout Standard
+Use case: 
+\series bold
+Disable Alarms
+\series default
+: 
+\end_layout
+
+\begin_layout Section
+Requirements Specification
+\end_layout
+
+\begin_layout Subsection
+External Interface Requirements
+\end_layout
+
+\end_body
+\end_document

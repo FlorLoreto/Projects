@@ -1,0 +1,687 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\options fleqn,liststotoc,bibtotoc,idxtotoc,BCOR7.5mm,titlepage,tablecaptionabove
+\use_default_options false
+\begin_modules
+logicalmkup
+theorems-starred
+endnotes
+hanging
+minimalistic
+eqs-within-sections
+figs-within-sections
+tabs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\begin_local_layout
+Format 7
+InsetLayout CharStyle:MenuItem
+LyxType               charstyle
+LabelString           menu
+LatexType             command
+LatexName             menuitem
+Font
+Family              Sans
+EndFont
+Preamble
+\newcommand*{\menuitem}[1]{{\sffamily #1}}
+EndPreamble
+End
+\end_local_layout
+\language british
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement h
+\paperfontsize 12
+\spacing single
+\use_hyperref true
+\pdf_title "Manual Personalización de LyX"
+\pdf_author "Equipo LyX"
+\pdf_subject "LyX-documentation Customization"
+\pdf_keywords "LyX, documentation, customization"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen true
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle false
+\pdf_quoted_options "linkcolor=black, citecolor=black, urlcolor=blue, filecolor=blue,pdfpagelayout=OneColumn, pdfnewwindow=true,pdfstartview=XYZ, plainpages=false, pdfpagelabels"
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 0
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\branch OutDated
+\selected 0
+\filename_suffix 0
+\color #ffffff
+\end_branch
+\index Índice
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2.5cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle plain
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Easy Handling The Internet of Things with Arduino
+\end_layout
+
+\begin_layout Author
+Rafael Pereira
+\end_layout
+
+\begin_layout Part
+The Internet of Things and Arduino.
+\end_layout
+
+\begin_layout Section
+The Internet of Things (IOT).
+\end_layout
+
+\begin_layout Standard
+The Internet of Things (IoT) is the 
+\emph on
+network of physical objects
+\emph default
+ - devices, vehicles, buildings and other items - 
+\emph on
+embedded with electronics, software, sensors, and network connectivity that
+ enables these objects to collect and exchange data
+\emph default
+.
+ The Internet of Things allows objects to be sensed and controlled remotely
+ across existing network infrastructure, creating opportunities for more
+ direct integration of the physical world into computer-based systems, and
+ resulting in improved efficiency, accuracy and economic benefit.
+ 
+\end_layout
+
+\begin_layout Standard
+When 
+\emph on
+IoT is augmented with sensors and actuators
+\emph default
+, the technology becomes an instance of the more general class of 
+\emph on
+cyber-physical systems
+\emph default
+, which also encompasses technologies such as smart grids, smart homes,
+ intelligent transportation and smart cities.
+ Each thing is uniquely identifiable through its embedded computing system
+ but is able to interoperate within the existing Internet infrastructure.
+ 
+\end_layout
+
+\begin_layout Standard
+British entrepreneur Kevin Ashton first coined the term in 1999 while working
+ at Auto-ID Labs (originally called Auto-ID centers, referring to a global
+ network of objects connected to radio-frequency identification, or RFID).
+ Typically, IoT is expected to offer advanced connectivity of devices, systems,
+ and services that goes beyond machine-to-machine (M2M) communications and
+ covers a variety of protocols, domains, and applications.
+ The interconnection of these embedded devices (including smart objects),
+ is expected to usher in automation in nearly all fields, while also enabling
+ advanced applications like a Smart Grid, and expanding to the areas such
+ as smart cities.
+\end_layout
+
+\begin_layout Standard
+Let's review some of the more important application fields of IOT:
+\end_layout
+
+\begin_layout Subsection
+Electrical Power Networks (Smart Grids).
+\end_layout
+
+\begin_layout Standard
+A 
+\series bold
+\emph on
+smart grid
+\series default
+\emph default
+ is an electrical grid which includes a variety of operational and energy
+ measures including smart meters, smart appliances, renewable energy resources,
+ and energy efficiency resources.
+ Electronic power conditioning and control of the production and distribution
+ of electricity are important aspects of the smart grid.
+\end_layout
+
+\begin_layout Standard
+Smart grid policy is organized in Europe as Smart Grid European Technology
+ Platform.
+ 
+\end_layout
+
+\begin_layout Standard
+Roll-out of smart grid technology also implies a fundamental re-engineering
+ of the electricity services industry, although typical usage of the term
+ is focused on the technical infrastructure
+\end_layout
+
+\begin_layout Standard
+Since the early 
+\begin_inset Formula $\textrm{21{}^{st}}$
+\end_inset
+
+ century, opportunities to take advantage of improvements in electronic
+ communication technology to resolve the limitations and costs of the electrical
+ grid have become apparent.
+ Technological limitations on metering no longer force peak power prices
+ to be averaged out and passed on to all consumers equally.
+ In parallel, growing concerns over environmental damage from fossil-fired
+ power stations has led to a desire to use large amounts of renewable energy.
+ Dominant forms such as wind power and solar power are highly variable,
+ and so the need for more sophisticated control systems became apparent,
+ to facilitate the connection of sources to the otherwise highly controllable
+ grid.
+ Power from photovoltaic cells (and to a lesser extent wind turbines) has
+ also, significantly, called into question the imperative for large, centralised
+ power stations.
+ The rapidly falling costs point to a major change from the centralised
+ grid topology to one that is highly distributed, with power being both
+ generated and consumed right at the limits of the grid.
+ Finally, growing concern over terrorist attack in some countries has led
+ to calls for a more robust energy grid that is less dependent on centralised
+ power stations that were perceived to be potential attack targets.
+\end_layout
+
+\begin_layout Subsection
+Domotics (Smart Homes).
+\end_layout
+
+\begin_layout Standard
+Home automation or Domotics is the use and control of home appliances remotely
+ or automatically.
+ Early home automation began with labour-saving machines like washing machines.
+ Some home automation appliances are stand alone and do not communicate,
+ such as a programmable light switch, while others are part of the internet
+ of things and are networked for remote control and data transfer.
+ Hardware devices can include sensors (like cameras and thermometers), controlle
+rs, actuators (to do things), and communication systems.
+ Remote control can range from a simple remote control to a smartphone with
+ Bluetooth, to a computer on the other side of the world connected by internet.
+ Home automation systems are available which consist of a suite of products
+ designed to work together.
+ These typically connected through Wi-Fi or power line communication to
+ a hub which is then accessed with a software application.
+ Popular applications include thermostats, security systems, blinds, lighting,
+ and door locks.
+ Popular suites of products include 
+\emph on
+X10
+\emph default
+, 
+\emph on
+Z-Wave
+\emph default
+, and 
+\emph on
+Zigbee 
+\emph default
+all of which are incompatible with each other.
+ Home automation is the domestic application of building automation.
+\end_layout
+
+\begin_layout Subsection
+Smart Cities.
+\end_layout
+
+\begin_layout Standard
+A smart city is a urban development vision to integrate multiple information
+ and communication technology (ICT) solutions in a secure fashion to manage
+ a city’s assets,e.g.
+ local departments information systems, schools, libraries, transportation
+ systems, hospitals, power plants, law enforcement, and other community
+ services.
+ The goal of building a smart city is to improve quality of life by using
+ technology to improve the efficiency of services and meet residents’ needs.
+ ICT allows city officials to interact directly with the community and the
+ city infrastructure and to tell what is happening in the city, how the
+ city is evolving, and how to enable a better quality of life.
+ Through the use of real-time systems and sensors, data are collected from
+ citizens and objects - then processed in real-time.
+ The information and knowledge gathered are keys to tackling inefficiency.
+\end_layout
+
+\begin_layout Standard
+ICT is used to enhance quality, performance and interactivity of urban services,
+ to reduce costs and resource consumption and to improve contact between
+ citizens and government.
+ Smart city applications are developed with the goal of improving the management
+ of urban flows and allowing for real time responses to challenges.
+ A smart city may therefore be more prepared to respond to challenges than
+ one with a simple 'transactional' relationship with its citizens.
+\end_layout
+
+\begin_layout Standard
+Other terms that have been used for similar concepts include cyberville,
+ digital city, electronic communities, flexicity, information city, intelligent
+ city, knowledge-based city, MESH city, telecity, teletopia, Ubiquitous
+ city, wired city
+\end_layout
+
+\begin_layout Standard
+Sectors that have been developing smart city technology include government
+ services, transport and traffic management, energy, health care, water,
+ innovative urban agriculture and waste management.
+\end_layout
+
+\begin_layout Standard
+Major technological, economic and environmental changes have generated interest
+ in smart cities, including climate change, economic restructuring, the
+ move to online retail and entertainment, ageing populations, and pressures
+ on public finances.
+ The European Union (EU) has devoted constant efforts to devising a strategy
+ for achieving 'smart' urban growth for its metropolitan city-regions.The
+ EU has developed a range of programmes under ‘Europe’s Digital Agenda
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+target "https://ec.europa.eu/digital-agenda/"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ In 2010, it highlighted its focus on strengthening innovation and investment
+ in ICT services for the purpose of improving public services and quality
+ of life.
+ Examples of Smart City technologies and programs have been implemented
+ in Milton Keynes, Southampton,Amsterdam, Barcelona
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+target "http://smartcity.bcn.cat/en"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ and Stockholm.
+\end_layout
+
+\begin_layout Subsection
+Smart Cars (Vehicular Automation).
+\end_layout
+
+\begin_layout Standard
+Vehicular automation involves the use of mechatronics, artificial intelligence,
+ and multi-agent system to assist a vehicle's operator.
+ These features and the vehicles employing them may be labelled as intelligent
+ or smart.
+ A vehicle using automation for difficult tasks, especially navigation,
+ may be referred to as semi-autonomous.
+ A vehicle relying solely on automation is consequently referred to as robotic
+ or autonomous.
+ After the invention of the integrated circuit, the sophistication of automation
+ technology increased.
+ Manufacturers and researchers subsequently added a variety of automated
+ functions to automobiles and other vehicles.
+\end_layout
+
+\begin_layout Standard
+Here again, the EU has set up a policy framework - 
+\emph on
+The Intelligent Car Initiative
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+target "https://ec.europa.eu/digital-agenda/en/you-your-vehicle-and-technologies"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\emph default
+ - to tie up all activities relating to 'intelligent' automobiles.
+ The term covers all vehicles that are equipped with modern information
+ and communication technologies (ICT) to increase road safety and/or the
+ flow of traffic, or to reduce the environmental impact of road transport.
+ A well-established and widely known 'intelligent' device would be the anti-lock
+ braking system ABS, which prevents the wheels from locking while braking
+ and thus enables the driver keeping the car under control.
+ An example for a more recent system would be the electronic brake assistance
+ which helps the driver brake effectively, or even brakes the car on its
+ own if a collision is imminent and there is no driver reaction at all.
+\end_layout
+
+\begin_layout Section
+Small-scale IOT.
+\end_layout
+
+\begin_layout Standard
+All the initiatives and projects mentioned in the previous paragraph are
+ high-sounding declarations and, of course, we expect them to be working
+ in some years; but, what about those numerous devices that surround us
+ in our everyday life that we hardly know how to control? Who knows how
+ to set and use the many features of a washing machine or an electric oven?
+\end_layout
+
+\begin_layout Standard
+This is particularly true for programmable devices that we program the first
+ time we install them and - what is very common - if for some reason its
+ settings are lost, we have to reprogram it and, most likely, we won't be
+ able to find the user's guide that came with it.
+ At best, we will find the booklet an reschedule the widget.Otherwise and,
+ if we are fortunate, we will be able to find in Internet some information
+ that will permit us to reset the device or even a pdf of the user's guide.
+\end_layout
+
+\begin_layout Standard
+But this is just the beginning.
+ Can anybody still remember the time and efforts required to schedule a
+ chronothermostat, for instance?.
+\end_layout
+
+\begin_layout Standard
+Let's take a look at some user´s manual.
+\end_layout
+
+\begin_layout Subsection*
+in Spanish.
+\end_layout
+
+\begin_layout Standard
+The user`s guide has eighteen pages and starts by showing to us a schematic
+ of the thermostat: It is full of buttons and we will have to press all
+ of them to restart it!
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/Administrador/Documents/INFORMATICA/ARDUINO/honeywell.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+in English.
+\end_layout
+
+\begin_layout Standard
+What we find is something similar: buttons and more buttons.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/Administrador/Documents/INFORMATICA/ARDUINO/watson.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+In French 
+\end_layout
+
+\begin_layout Standard
+We find more or less the same:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/Administrador/Documents/INFORMATICA/ARDUINO/french.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Vero Boards
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+or stripboard
+\end_layout
+
+\end_inset
+
+
+\series default
+ will be used.
+ http://fritzing.org/home/ makes PCBs for Arduino.
+\end_layout
+
+\begin_layout Section
+Some open Platforms for developing IOT projects.
+\end_layout
+
+\begin_layout Enumerate
+The most popular one is, undoubtedly, 
+\series bold
+ARDUINO
+\series default
+ but it is not the best.
+ For instance, the IDE is not powerful enough, documentation is poor.The
+ underlying framework uses some C and some C++ features, both are not clearly
+ described.
+ 
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+ARM
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+https://www.arm.com/, https://en.wikipedia.org/wiki/ARM_Holdings
+\end_layout
+
+\end_inset
+
+
+\series default
+ 
+\series bold
+mbed
+\series default
+ (https://www.mbed.com/en/) is the idea that the Internet of Things (IoT)
+ is a collaboration between the people who make things, the people who use
+ things and the people who make the services all these things use.
+ ARM created a solution to help lead sustainable growth within the IoT and
+ named it mbed.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+mbed has a large community of developers, an ecosystem of open source IoT
+ code, a network of hardware partners, and products and services that serve
+ the IoT market.
+ Specially important is the 
+\series bold
+\emph on
+ARM mbed IoT Device Platform
+\series default
+\emph default
+:
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+WINAVR 
+\series default
+is a suite of executable, open source software development tools for the
+ Atmel AVR series of RISC microprocessors hosted on the Windows platform.
+ It includes the GNU GCC compiler for C and C++.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+You can check out the WinAVR
+\begin_inset Formula $^{\textrm{TM}}$
+\end_inset
+
+ project on Sourceforge at http://sourceforge.net/projects/winavr/ for developer
+ information.
+ 
+\end_layout
+
+\begin_layout Standard
+WinAVRTM contains all the tools for developing on the AVR.
+ This includes avr-gcc (compiler), avrdude (programmer), avr-gdb (debugger).
+ WinAVR is used all over the world from hobbyists sitting in their damp
+ basements, to schools, to commercial projects.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+For cost and time-saving reasons we have chosen the ARDUINO platform to
+ prototype the project.
+\end_layout
+
+\begin_layout Part
+
+\lang english
+The
+\lang british
+ 
+\lang english
+project
+\lang british
+.
+\end_layout
+
+\begin_layout Standard
+We want to develop a chronothermostat that permits to be controlled from
+ any computer in a domestic LAN.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../ARDUINO/new_schema.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/Administrador/Documents/INFORMATICA/ARDUINO/arduweb.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There are different control systems for heating and A/C systems, but one
+ of the most common is the one which uses independent (chrono)thermostats
+ for each zone to be climatized.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../ARDUINO/2_areas.png
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

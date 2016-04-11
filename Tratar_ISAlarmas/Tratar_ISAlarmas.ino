@@ -44,12 +44,16 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   setTime(hora, minuto, segundo, dia, mes, anyo);
-  Alarm.alarmRepeat(alarmHora, alarmMinuto,  alarmSegundo + 5, MorningAlarm1);
-  Alarm.alarmRepeat(alarmHora, alarmMinuto,  alarmSegundo + 30, MorningAlarm2);
+  int ID1= Alarm.alarmRepeat(alarmHora, alarmMinuto,  alarmSegundo + 5, MorningAlarm1);
+  int ID2=Alarm.alarmRepeat(alarmHora, alarmMinuto,  alarmSegundo + 30, MorningAlarm2);
   pinMode (buzPin, OUTPUT);
   pinMode (redPin, OUTPUT);
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
+  /*ID = Alarm.timerOnce(60, spinning);
+
+  disable(ID1);  //-  prevent the alarm associated with the given ID from triggering   
+  enable(ID1); */
 }
 
 void loop() {

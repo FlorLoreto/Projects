@@ -1,0 +1,477 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+% DO NOT ALTER THIS PREAMBLE!!!
+%
+% This preamble is designed to ensure that the manual prints
+% out as advertised. If you mess with this preamble,
+% parts of the document may not print out as expected.  If you
+% have problems LaTeXing this file, please contact 
+% the documentation team
+% email: lyx-docs@lists.lyx.org
+
+\usepackage{ifpdf} % part of the hyperref bundle
+\ifpdf % if pdflatex is used
+\pagestyle{plain} 
+ % set fonts for nicer pdf view
+ \IfFileExists{lmodern.sty}
+  {\usepackage{lmodern}}{}
+
+\fi % end if pdflatex is used
+
+% the pages of the TOC is numbered roman
+% and a pdf-bookmark for the TOC is added
+\let\myTOC\tableofcontents
+\renewcommand\tableofcontents{%
+  \frontmatter
+  \pdfbookmark[1]{\contentsname}{}
+  \myTOC
+  \mainmatter }
+
+% redefine the \LyX macro for PDF bookmarks
+\def\LyX{\texorpdfstring{%
+  L\kern-.1667em\lower.25em\hbox{Y}\kern-.125emX\@}
+  {LyX}}
+
+% used for multi-column text
+\usepackage{multicol}
+\usepackage{inputenc}
+\end_preamble
+\options fleqn,liststotoc,bibtotoc,idxtotoc,BCOR7.5mm,titlepage,tablecaptionabove
+\use_default_options false
+\begin_modules
+logicalmkup
+theorems-starred
+endnotes
+hanging
+minimalistic
+eqs-within-sections
+figs-within-sections
+tabs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\begin_local_layout
+Format 7
+InsetLayout CharStyle:MenuItem
+LyxType               charstyle
+LabelString           menu
+LatexType             command
+LatexName             menuitem
+Font
+Family              Sans
+EndFont
+Preamble
+\newcommand*{\menuitem}[1]{{\sffamily #1}}
+EndPreamble
+End
+\end_local_layout
+\language british
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement h
+\paperfontsize 12
+\spacing single
+\use_hyperref true
+\pdf_title "Manual Personalización de LyX"
+\pdf_author "Equipo LyX"
+\pdf_subject "LyX-documentation Customization"
+\pdf_keywords "LyX, documentation, customization"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen true
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle false
+\pdf_quoted_options "linkcolor=black, citecolor=black, urlcolor=blue, filecolor=blue,pdfpagelayout=OneColumn, pdfnewwindow=true,pdfstartview=XYZ, plainpages=false, pdfpagelabels"
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 0
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\branch OutDated
+\selected 0
+\filename_suffix 0
+\color #ffffff
+\end_branch
+\index Índice
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2.5cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle plain
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Requirements Specification for 
+\emph on
+the development of a chronothermostat adapted to the Internet of Things
+\end_layout
+
+\begin_layout Author
+Rafael Pereira del Estal
+\end_layout
+
+\begin_layout Date
+March, 2017
+\end_layout
+
+\begin_layout Section
+Introduction.
+\end_layout
+
+\begin_layout Standard
+This section gives a scope description and overview of everything included
+ in this SRS
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+SRS
+\end_layout
+
+\end_inset
+
+ document.
+ Also, the purpose for this document is described and a list of abbreviations
+ and definitions is provided.
+ 
+\end_layout
+
+\begin_layout Subsection
+Purpose.
+\end_layout
+
+\begin_layout Standard
+The purpose of this document is to give a detailed description of the requiremen
+ts to be met by a chronothermostat
+\emph on
+ 
+\emph default
+adapted to the Internet of Things.
+ It will explain the purpose of the development and the functions to be
+ performed by the system
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+system
+\end_layout
+
+\end_inset
+
+.
+ It will also explain system constraints, interface and interactions with
+ other external applications.
+ This document is intended to be a reference for developing the first version
+ of the system and has been written after consulting with a group of potential
+ users an agreed upon by the development team.
+ 
+\end_layout
+
+\begin_layout Subsection
+Scope.
+\end_layout
+
+\begin_layout Standard
+The advent of the 
+\emph on
+Internet of Things
+\emph default
+ (IOT
+\begin_inset Index idx
+status open
+
+\begin_layout Plain Layout
+IOT
+\end_layout
+
+\end_inset
+
+) has rendered comparatively obsolete many devices of common use in households.
+ Nowadays it is unimaginable to push buttons repeatedly in order to program
+ the heating control of our house.
+ Furthermore, it only allows weekly programming and hour by hour and does
+ not provide to users any information that might be useful for optimization
+ purposes.
+ 
+\end_layout
+
+\begin_layout Standard
+It is a situation similar to that experienced when we compare a mobile smartphon
+e with a fixed telephone; the first has a full color touchscreen, connection
+ to Internet, camera, contact agenda, voice recognition,...etc.
+ while the second looks like, what it is, an old fashioned widget that only
+ serves to make phone calls although it is certainly possible to provide
+ a landline telephone with the same functionality as a smartphone (excluding
+ extended mobility).
+\end_layout
+
+\begin_layout Standard
+So the requirements for a chronothermostat in the Internet era can include
+ 
+\end_layout
+
+\begin_layout Enumerate
+the possibility of being accessed via a web browser at least from a smartphone,
+ tablet or PC from the home Wi-Fi LAN;
+\end_layout
+
+\begin_layout Enumerate
+the option of using an outdoor meteorological station;
+\end_layout
+
+\begin_layout Enumerate
+the interchange of incoming and outgoing data through networks with different
+ purposes:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+setting calendars an clocks;
+\end_layout
+
+\begin_layout Enumerate
+programming the heating schedule;
+\end_layout
+
+\begin_layout Enumerate
+loading new software versions in the chronothermostat ;
+\end_layout
+
+\begin_layout Enumerate
+exchanging data between chronothermostat and outdoor metyeorological station;
+\end_layout
+
+\begin_layout Enumerate
+collecting and sending operating stats from the chronothermostat and the
+ meteorological station;
+\end_layout
+
+\begin_layout Enumerate
+keeping its heating schedule in line with the weather forecasts retrieved
+ from Internet sites and the system meteorological station (optional) ....
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+This implies the development of a 
+\emph on
+system 
+\emph default
+which may reside in three places:
+\end_layout
+
+\begin_layout Itemize
+the chronothermostat itself 
+\end_layout
+
+\begin_layout Itemize
+the meteorological station and
+\end_layout
+
+\begin_layout Itemize
+some computer(s) in the household 
+\end_layout
+
+\begin_layout Standard
+and needs access to a Wi-Fi LAN and through it to Internet.
+ a schematic diagram is shown below.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../pegado1.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+
+\lang english
+Definitions
+\lang british
+, acronyms, and abbreviations.
+\end_layout
+
+\begin_layout Subsection
+References.
+\end_layout
+
+\begin_layout Standard
+[1] 
+\emph on
+https://www.arduino.cc/
+\emph default
+: ARDUINO web page.
+\end_layout
+
+\begin_layout Standard
+[2] 
+\emph on
+https://openwrt.org/
+\emph default
+: Openwrt web page.
+\end_layout
+
+\begin_layout Standard
+[3] Julien Bayle, '
+\emph on
+C Programming for Arduino
+\emph default
+', Birmingham, UK, Packt Publishing, 2013.
+\end_layout
+
+\begin_layout Standard
+[4] http://learnpythonthehardway.org/book/: html version of the 3rd Edition
+ of the book: Zed A.
+ Shaw, 
+\emph on
+'Learn Python the Hard Way
+\emph default
+'.
+ 
+\end_layout
+
+\begin_layout Standard
+[5] Escuela Politécnica Federal de Zúrich (ETH): '
+\emph on
+Software requirements Spec Template'
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+[6] http://www.mikrocontroller.net/: Detailed descriptions ant tutorials 
+ about microcontrollers.
+\end_layout
+
+\begin_layout Section
+Overall description.
+\end_layout
+
+\begin_layout Subsection
+System perspective.
+\end_layout
+
+\begin_layout Subsection
+System functions.
+\end_layout
+
+\begin_layout Subsection
+User characterization.
+\end_layout
+
+\begin_layout Subsection
+Constraints.
+\end_layout
+
+\begin_layout Subsection
+Assumptions and dependencies.
+\end_layout
+
+\begin_layout Subsection
+Apportioning of requirements.
+\end_layout
+
+\begin_layout Standard
+Some requirements will be included in the next version of the system.
+ Those requirements are to be developed in the second release, see Appendix
+ I.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset nomenclature
+LatexCommand nomenclature
+symbol "SR"
+description "Huevada"
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Section
+Specific requirements.
+\end_layout
+
+\begin_layout Standard
+This section contains all of the functional and quality requirements of
+ the system.
+ It gives a detailed description of the system and all its features.
+\end_layout
+
+\begin_layout Section
+Specific requirements.
+\end_layout
+
+\begin_layout Subsection
+External interface Requirements.
+\end_layout
+
+\begin_layout Subsection
+Functional requirements.
+\end_layout
+
+\end_body
+\end_document
