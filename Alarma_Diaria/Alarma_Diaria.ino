@@ -32,9 +32,9 @@ unsigned long currentMillis;
 unsigned long previousMillis = 0;
 unsigned long intervalo = 3000;
 String respuesta = "";
-const int redPin = 9;
-const int greenPin = 10;
-const int bluePin = 11;
+const int redPin = 3;
+const int greenPin = 5;
+const int bluePin = 4;
 const int buzzPin = 3;
 
 //B) Las intensidades de cada color dadas por el ciclo de trabajo del PWM
@@ -134,25 +134,25 @@ void AlarmaD() {
 }
 void callbackD() {
   k = k + 1; Serial.print ("  k "); Serial.println(k); Serial.print (";  flag "); Serial.print(flag);
-  if (k <= 5) {
+  if (reloj.elapsed() <= 5) {
     digitalWrite(redPin, redInt);
     analogWrite(buzzPin, 127);
   }
-  else if (k > 5 && k <= 6) {
+  else if (reloj.elapsed() > 5 && reloj.elapsed() <= 6) {
     digitalWrite(redPin, redInt / 2); digitalWrite(greenPin, greenInt / 2);
     analogWrite(buzzPin, 0);
   }
-  else if (k > 6 && k <= 11) {
+  else if (reloj.elapsed() > 6 && reloj.elapsed() <= 11) {
     digitalWrite(greenPin, greenInt);
     digitalWrite(redPin, 0);
     analogWrite(buzzPin, 34);
   }
-  else if (k > 11 && k <= 13) {
+  else if (reloj.elapsed() > 11 && reloj.elapsed() <= 13) {
     digitalWrite(greenPin, greenInt / 2); digitalWrite(bluePin, blueInt / 2);
     digitalWrite(redPin, 0);
     analogWrite(buzzPin, 0);
   }
-  else if (k > 13 && k <= 18) {
+  else if (reloj.elapsed() > 13 && reloj.elapsed() <= 18) {
     digitalWrite(bluePin, greenInt);
     digitalWrite(greenPin, 0);
     analogWrite(buzzPin, 205);

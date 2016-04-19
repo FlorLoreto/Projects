@@ -1,0 +1,567 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\options fleqn,liststotoc,bibtotoc,idxtotoc,BCOR7.5mm,titlepage,tablecaptionabove
+\use_default_options false
+\begin_modules
+logicalmkup
+theorems-starred
+endnotes
+hanging
+minimalistic
+eqs-within-sections
+figs-within-sections
+tabs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\begin_local_layout
+Format 7
+InsetLayout CharStyle:MenuItem
+LyxType               charstyle
+LabelString           menu
+LatexType             command
+LatexName             menuitem
+Font
+Family              Sans
+EndFont
+Preamble
+\newcommand*{\menuitem}[1]{{\sffamily #1}}
+EndPreamble
+End
+\end_local_layout
+\language british
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement h
+\paperfontsize 12
+\spacing single
+\use_hyperref true
+\pdf_title "Manual Personalización de LyX"
+\pdf_author "Equipo LyX"
+\pdf_subject "LyX-documentation Customization"
+\pdf_keywords "LyX, documentation, customization"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen true
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle false
+\pdf_quoted_options "linkcolor=black, citecolor=black, urlcolor=blue, filecolor=blue,pdfpagelayout=OneColumn, pdfnewwindow=true,pdfstartview=XYZ, plainpages=false, pdfpagelabels"
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 0
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\branch OutDated
+\selected 0
+\filename_suffix 0
+\color #ffffff
+\end_branch
+\index Índice
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2.5cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle plain
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Part
+\noindent
+Features of the SW.
+\end_layout
+
+\begin_layout Standard
+The Alarm Clock project has basically five main blocks (including network
+ connection which is only required in
+\emph on
+ phase ii
+\emph default
+) that exhibit some notable features :
+\end_layout
+
+\begin_layout Enumerate
+System setting
+\end_layout
+
+\begin_layout Enumerate
+Alarm handling
+\end_layout
+
+\begin_layout Enumerate
+Information display
+\end_layout
+
+\begin_layout Enumerate
+Reset
+\end_layout
+
+\begin_layout Enumerate
+Network connection
+\end_layout
+
+\begin_layout Section
+TimeAlarm
+\end_layout
+
+\begin_layout Standard
+The 
+\emph on
+TimeAlarm 
+\emph default
+library, of paramount importance in this project, is very poorly documented
+ and it is necessary to be careful with some points.
+\end_layout
+
+\begin_layout Itemize
+Maximum predefined number of alarms: 6.
+ Can be changed in 
+\series bold
+\emph on
+TimeAlarms.h
+\series default
+\emph default
+ header file with 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+#define dtNBR_ALARMS numberAlarms
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+AlarmId nameOfAlarm
+\emph default
+ assigns a name to an alarm.
+ It starts in 0 for the one located in the first position until dtNBR_ALARMS.
+ Beyond that, all are numbered as 255.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+AlarmId AlMonday = Alarm.alarmRepeat(dowMonday, 0, 0, 5, callback);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+Alarm.getTriggeredAlarmId()
+\end_layout
+
+\end_inset
+
+ only works in callback functions.
+\end_layout
+
+\begin_layout Section
+Set_Alarms
+\end_layout
+
+\begin_layout Standard
+It's the first part of the process chain.
+\end_layout
+
+\begin_layout Standard
+Set_Alarms is in charge of:
+\end_layout
+
+\begin_layout Enumerate
+Collecting the system settings (date, time and alarm schedule) and
+\end_layout
+
+\begin_layout Enumerate
+handling alarm triggering (duration and intensity of luminous and sound
+ effects,...).
+\end_layout
+
+\begin_layout Standard
+It is extremely
+\series bold
+ important 
+\series default
+to check that 
+\series bold
+in the 
+\emph on
+Serial Monitor
+\series default
+ 
+\emph default
+we have selected
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+No new line
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Baud rate equal to that in 
+\emph on
+Serial.begin(Baud_Rate)
+\end_layout
+
+\begin_layout Standard
+Otherwise there will be problems converting ASCII codes to numbers - if
+ 
+\emph on
+New Line
+\emph default
+ - or the screen will display strange unintelligible symbols - if
+\emph on
+ different baud rates
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename baudio.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+LCD
+\end_layout
+
+\begin_layout Standard
+All HD44780-based displays (of any size) use the same standard 14-wire interface
+, excluding the backligth control pins.
+ 
+\end_layout
+
+\begin_layout Standard
+The first 
+\series bold
+\emph on
+three pins
+\series default
+\emph default
+ provide power to the LCD module.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Pin 1
+\series default
+ is Vss and should be grounded to the power supply.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Pin 2
+\series default
+ is Vcc and should be connected to +5V power.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Pin 3
+\series default
+ is the LCD Display Bias.
+ By adjusting the voltage or duty cycle of pin 3, the 
+\series bold
+contrast
+\series default
+ of the display can be adjusted.
+ Most character LCDs can achieve good display contrast with a voltage between
+ 5V and 0V on pin 3.Greater contrast comes with lower voltage and you should
+ never apply a VLCD higher than VCC.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename LCD Pin.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Pins 4
+\series default
+, 
+\series bold
+5
+\series default
+, and 
+\series bold
+6
+\series default
+ are the control lines for the LCD.
+ These lines indicate what kind of transaction you are proposing to do over
+ the data lines DB0-7.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+The state of 
+\series bold
+\emph on
+RS
+\series default
+\emph default
+ - 4 - indicates whether you wish to transfer commands or display data.
+ The
+\series bold
+\emph on
+ R/W
+\series default
+\emph default
+ - 5 - line indicates whether you intend to read or write.
+ Finally, the
+\series bold
+\emph on
+ E
+\series default
+\emph default
+ - 6 line tells the display when you are actually ready to perform the transacti
+on.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\series bold
+Pins
+\series default
+ DB0-7 are the data lines.
+ 
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Pins 15 
+\series default
+and
+\series bold
+ 16 
+\series default
+are optional and they control the backlight 
+\end_layout
+
+\begin_layout Standard
+The control lines RS, R/W, and E, along with the data lines are standard
+ digital logic inputs or outputs.When performing 
+\emph on
+reads
+\emph default
+ you must set the port connected to DB0-7 to be input (output if 
+\emph on
+writes
+\emph default
+).
+\end_layout
+
+\begin_layout Standard
+Character LCD modules are accessed through only two “registers”, the 
+\emph on
+Command Register
+\emph default
+, and the 
+\emph on
+Data Register
+\emph default
+.
+ When you perform a read or write with 
+\series bold
+\emph on
+RS low
+\series default
+\emph default
+, you are accessing the 
+\emph on
+Command Register
+\emph default
+ and giving the module instructions.
+ When you read or write with 
+\series bold
+\emph on
+RS high
+\series default
+\emph default
+, you are accessing the 
+\emph on
+Data Registe
+\emph default
+r and reading or writing characters/data from or to the display.
+\end_layout
+
+\begin_layout Standard
+If you are 
+\emph on
+driving the pixels directly with DC
+\emph default
+ 
+\emph on
+you will destroy the LCD
+\emph default
+.
+ You need to drive them with a perfect square wave 180 degrees out of phase
+ so that 
+\emph on
+the LCD sees an alternating polarity
+\emph default
+ since liquid crystal is a chemical that will electrolyse into its components
+ just like water will go to hydrogen and oxygen,and this destroys the ability
+ of the "liquid crystal" to react.
+\end_layout
+
+\begin_layout Standard
+LCD displays can work with 
+\emph on
+only four DB lines
+\emph default
+, it will only affect the speed that is reduced by half since the eight
+ bits required to form a character are to be sent as two 4-bit blocks.
+\end_layout
+
+\begin_layout Standard
+We shall use the following connections:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../../AUX_ARDUINO/BIBLIOGAFIA/lcd1.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+And we keep (apart from digital pins 0 an 1) 6 digital and 6 analogue pins
+ free (total 10).
+ Since we need 5 for the alarm clock, they are enough.
+\end_layout
+
+\begin_layout Standard
+So we can build our project on a small breadboard.
+ The new pin assignment takes into account that only the pins labelled with
+ 
+\begin_inset Formula $\sim3,\sim5,\sim6,\sim9,\sim10\;\textrm{y}\;\sim11$
+\end_inset
+
+ can process 
+\emph on
+analogWrite()
+\emph default
+ commands.
+\end_layout
+
+\begin_layout Section
+Reset
+\end_layout
+
+\begin_layout Standard
+The system resetting is handled through interrupts associated to a pin which
+ is sensed by the system.
+\end_layout
+
+\end_body
+\end_document

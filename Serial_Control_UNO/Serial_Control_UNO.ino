@@ -50,6 +50,21 @@ void getEntry(String *devol1, int *devol2) {
       input = "";
       *devol1 = salida;
       *devol2 = salida[0] - '0';
+      switch (*devol2) {
+        case 1 :
+          Serial.print("datos de fecha: "); Serial.println(salida.substring(1, 3) + "-" + salida.substring(3, 5) + "-" + salida.substring(5, 9));
+         Serial.flush();
+          break;
+        case 2 :
+          Serial.print("datos de hora: "); Serial.println(salida.substring(1, 3) + ":" + salida.substring(3, 5) + ":" + salida.substring(5, 7));
+          break;
+        case 3 :
+          Serial.print ("datos de alarma laborable: "); Serial.println(salida.substring(1, 3) + ":" + salida.substring(3, 5));
+          break;
+          case 4 :
+          Serial.print ("datos de alarma fin de semana: "); Serial.println(salida.substring(1, 3) + ":" + salida.substring(3, 5));
+          break;
+      }
     }
   }
 }

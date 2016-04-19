@@ -33,10 +33,10 @@ unsigned long currentMillis;
 unsigned long previousMillis = 0;
 unsigned long intervalo = 3000;
 String respuesta = "";
-const int redPin = 9;
-const int greenPin = 10;
-const int bluePin = 11;
-const int buzzPin = 3;
+const int redPin = 3;
+const int greenPin = 4;
+const int bluePin = 5;
+const int buzzPin = 6;
 
 //B) Las intensidades de cada color dadas por el ciclo de trabajo del PWM
 
@@ -202,11 +202,6 @@ void setup() {
   analogWrite(redPin, 0);
   analogWrite(greenPin, 0);
   analogWrite(bluePin, 0);
-  T.SetTimer(0,0,10);
-  T.StartTimer();
-  
- T1.SetTimer(0,0,10);
-  T1.StartTimer();
  
   
 }
@@ -225,16 +220,6 @@ void loop() {
   Alarm.alarmRepeat(dowThursday, alarmHora, alarmMinuto,  alarmSegundo, Alarma);
   Alarm.alarmRepeat(dowFriday, alarmHora, alarmMinuto,  alarmSegundo, Alarma); 
   
-  if (T.TimeHasChanged() ) // this prevents the time from being constantly shown.
-  {  Serial.print ("\nserialData\t"); Serial.println (serialData);
-    Serial.printf ("Fecha: %d-%d-%d. Hora: %d:%d:%d\n", day(), month(), year(), hour(), minute(), second());
-    Serial.printf ("Alarma: %d:%d:%d\n", alarmHora, alarmMinuto,10);
-    Serial.print("Alarma ");Serial.println( Alarm.alarmRepeat(dowThursday, alarmHora, alarmMinuto,  alarmSegundo, Alarma));
-
-    }
-  else {
-    Serial.print("");
-  }
- 
+  
  Alarm.delay(0);
 }

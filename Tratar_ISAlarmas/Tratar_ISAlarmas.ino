@@ -1,7 +1,6 @@
 #include <Time.h>
 #include <TimeAlarms.h>
 #include <avr/wdt.h>
-#include <TimerOne.h>
 #include <StopWatch.h>
 int dia = 8;
 int mes = 4;
@@ -12,10 +11,10 @@ int segundo = 0;
 int alarmMinuto = 0;
 int alarmHora = 0;
 int alarmSegundo = 0;
-int redPin = 9;
-int greenPin = 10;
-int bluePin = 11;
-int buzPin = 3;
+int redPin = 3;
+int greenPin = 5;
+int bluePin = 4;
+int buzPin =6;
 
 long unsigned ante_Millis = 0;
 long unsigned actual_Millis;

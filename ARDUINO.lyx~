@@ -540,11 +540,14 @@ Some Platforms for developing IOT projects.
 \end_layout
 
 \begin_layout Enumerate
-Initially, the most popular open platform was, undoubtedly, 
+The most popular one is, undoubtedly, 
 \series bold
 ARDUINO
 \series default
- but nowadays it is neither the best nor alone.
+ but it is not the best.
+ For instance, the IDE is not powerful enough, documentation is poor.The
+ underlying framework uses some C and some C++ features, both are not clearly
+ described.
  
 \end_layout
 
