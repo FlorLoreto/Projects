@@ -307,13 +307,56 @@ New Line
 
 \end_layout
 
+\begin_layout Standard
+Care must been taken with:
+\end_layout
+
+\begin_layout Itemize
+Position where 
+\emph on
+time
+\emph default
+ is set and 
+\emph on
+alarms
+\emph default
+ are defined (immediately after 
+\emph on
+setTime
+\emph default
+).
+\end_layout
+
+\begin_layout Itemize
+Use of StopWatch: beware of 
+\emph on
+clock.start()
+\emph default
+ an
+\emph on
+ clock.stop()
+\emph default
+ or 
+\emph on
+clock.reset()
+\emph default
+.
+\end_layout
+
+\begin_layout Itemize
+Coherence between adjacent intervals in loops 
+\emph on
+if ...
+ else if
+\end_layout
+
 \begin_layout Section
 LCD
 \end_layout
 
 \begin_layout Standard
 All HD44780-based displays (of any size) use the same standard 14-wire interface
-, excluding the backligth control pins.
+, excluding the backlight control pins.
  
 \end_layout
 

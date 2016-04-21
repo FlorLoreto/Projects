@@ -24,6 +24,7 @@ String SEG = "";
 int alarmMinuto = 0;
 int alarmHora = 0;
 int alarmSegundo = 5;
+int decalaje;
 // .............. auxiliary variables .........................
 String hh = "";
 String mm = "";
@@ -32,6 +33,7 @@ int alarmHoraWeekEnd;
 int alarmMinutoWeekEnd;
 // ++++++++++++++++ auxiliary variable ************************
 String input = "";
+int trecePin=13;
 // -------------   alarms ID ----------------------------------
 AlarmId AlMonday;
 AlarmId AlTuesday;
@@ -50,23 +52,7 @@ unsigned long previousMillis = 0;
 unsigned long intervalo = 1000;
 String respuesta = "";
 int flag[7] = {0, 0, 0, 0, 0, 0, 0};
-// ---------------  pin definition -------------------------------
-// ................. pin 13 .....................................
-const int trecePin = 13;
-//................  LEG (RGB) pins ..............................
-const int redPin = 3;
-const int greenPin = 5;
-const int bluePin = 4;
-// ...............  buzzer pin ...................................
-const int buzzPin = 6;
-// -----------------  duty cycle --------------------------------
-const int redInt = 254;
-const int greenInt = 254;
-const int blueInt = 254;
-// --------------------- other variables -------------------------
-int k = 0;
-int kD = 0;
-int decalaje;
+boolean finAjuste=false;
 //--------------  object creation   ------------------------------
 StopWatch reloj(StopWatch::SECONDS);
 //=== function1 to print the command list:  ===========================
@@ -91,7 +77,7 @@ void printHelp3() {
 //=== function4 to print the command list:  ===========================
 void printHelp4() {
   Serial.println ("Instrucciones para ajustes de la alarma fin de semana");
-  Serial.print ("4. Hora: Introduzca el dígito '4' y luego las horas de decalalje respecto a laborable.\t");
+  Serial.print ("4. Hora: Introduzca el digito '4' y luego las horas de decalalje respecto a laborable.\t");
   Serial.println ("Termine con un '/' ");
 }
 //=== function to collect data throgh serial monitor:  ==================
@@ -127,8 +113,9 @@ void getEntry(String *devol1, int *devol2) {
           Serial.flush();
           break;
         case 4 :
-          Serial.print ("datos de alarma fin de semana: "); Serial.println(salida.substring(1, 3) + ":" + salida.substring(3, 5));
+          Serial.print ("datos de decalaje de alarma fin de semana: "); Serial.println(salida.substring(1, 2));
           Serial.flush();
+          finAjuste=true;
           break;
       }
     }
@@ -152,6 +139,7 @@ void stringtoNumber(String instruct) {
     hora = HH.toInt();
     minuto = MIN.toInt();
     segundo = SEG.toInt();
+   
   }
   if (instruct.substring(0, 1) == "3") {
     hh = instruct.substring(1, 3);
@@ -202,38 +190,31 @@ void Alarma6() {
 }
 void lightAndSound() {
   if (reloj.elapsed() <= 5) {
-    digitalWrite(redPin, redInt);
+     
     digitalWrite(trecePin, HIGH);
-    analogWrite(buzzPin, 127);
+     
   }
   else if (reloj.elapsed() > 5 && reloj.elapsed()<=6) {
-    digitalWrite(redPin, redInt / 2); digitalWrite(greenPin, greenInt / 2);
+    
     digitalWrite(trecePin, LOW);
-    analogWrite(buzzPin, 0);
+    
   }
   else if (reloj.elapsed() > 6 && reloj.elapsed() <= 11) {
-    digitalWrite(greenPin, greenInt);
-    digitalWrite(redPin, 0);
-    analogWrite(buzzPin, 34);
+     
     digitalWrite(trecePin, HIGH);
   }
   else if (reloj.elapsed() > 11 && reloj.elapsed() <= 13) {
-    digitalWrite(greenPin, greenInt / 2); digitalWrite(bluePin, blueInt / 2);
-    digitalWrite(redPin, 0);
-    analogWrite(buzzPin, 0);
+     
     digitalWrite(trecePin, LOW);
   }
   else if (reloj.elapsed() > 13 && reloj.elapsed() <= 18) {
-    digitalWrite(bluePin, greenInt);
-    digitalWrite(greenPin, 0);
-    analogWrite(buzzPin, 205);
+     
+     
     digitalWrite(trecePin, LOW);
   }
-  else {if (reloj.elapsed() > 18)
-    digitalWrite(greenPin, 0);
-    digitalWrite(bluePin, 0);
-    digitalWrite(redPin, 0);
-    analogWrite(buzzPin, 0);
+  else {
+     
+    
     for (int i; i < 7; ++i) {
       flag[i] = 0;
     }
@@ -247,13 +228,7 @@ void setup() {
   while (!Serial);
   setTime(0, 0, 0, 1, 1, 1970);
   Serial.begin(9600);   // Open serial port (9600 bauds).
-  pinMode(redPin, OUTPUT);
-  pinMode(greenPin, OUTPUT);
-  pinMode(bluePin, OUTPUT);
-  pinMode(buzzPin, OUTPUT);
-  digitalWrite(redPin, 0);
-  digitalWrite(greenPin, 0);
-  digitalWrite(bluePin, 0);
+  pinMode(trecePin, OUTPUT);
   AlMonday = Alarm.alarmRepeat(dowMonday, alarmHora, alarmMinuto,  alarmSegundo, Alarma0);
   AlTuesday = Alarm.alarmRepeat(dowTuesday, alarmHora, alarmMinuto,  alarmSegundo, Alarma1);
   AlWednesday = Alarm.alarmRepeat(dowWednesday, alarmHora, alarmMinuto,  alarmSegundo, Alarma2);
@@ -276,27 +251,21 @@ void setup() {
 //---------------- loop ---------------------------------------------
 
 void loop() {
-  currentMillis = millis();
-  if ((flag[0] == 1) || (flag[1] == 1) || (flag[2] == 1) || (flag[3] == 1) || (flag[4] == 1) || (flag[5] == 1) || (flag[6] == 1)) {
-  lightAndSound() ;
-  }
  
- while ((Serial.available()) && (dia == 0 && mes == 0 && anyo == 0) || (hora == 0 && minuto == 0 && segundo == 0) || (alarmHora == 0 && alarmMinuto == 0) || (alarmHoraWeekEnd == 0 && alarmMinutoWeekEnd == 0))
+   while ((Serial.available()) && finAjuste==false)
 {
   getEntry(&serialData, &primerNumero);
     stringtoNumber(serialData);
-
-    setTime(hora, minuto, segundo, dia, mes, anyo);
-    
-  }
-   
+    }
+  setTime(hora, minuto, segundo, dia, mes, anyo);  
+ while (finAjuste==true){setTime(hora, minuto, segundo, dia, mes, anyo);
+ currentMillis = millis();  
  if (currentMillis - previousMillis >= intervalo ) // this prevents the time from being constantly shown.
 { previousMillis = currentMillis;
-  Serial.print ("\nserialData\t"); Serial.println (serialData);
     Serial.printf ("Fecha: %d-%d-%d. Hora: %d:%d:%d\n", day(), month(), year(), hour(), minute(), second());
-    Serial.printf ("Alarma diaria: %d:%d:%d\n", alarmHora, alarmMinuto, 10);
+    Serial.printf ("Alarma diaria: %d:%d:%d\n", alarmHora, alarmMinuto, alarmSegundo);
   }
   
-
-   Alarm.delay(100);
+ }
+   Alarm.delay(0);
 }

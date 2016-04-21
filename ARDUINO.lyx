@@ -688,7 +688,32 @@ target "http://www.ti.com/ww/en/launchpad/launchpad.html?DCMP=mcu-launchpad&HQS=
 
 \end_inset
 
+.
+\end_layout
 
+\begin_layout Enumerate
+
+\series bold
+Kaa 
+\series default
+-
+\begin_inset CommandInset href
+LatexCommand href
+target "http://www.kaaproject.org/"
+
+\end_inset
+
+ - is an open-source IoT middleware platform for managing, collecting, analyzing
+, and acting on every aspect of communications between connected devices.
+ Kaa offers a range of pluggable features that allow building killer apps
+ for consumer products in days instead of weeks.
+ Kaa is compatible with virtually any modern consumer product or microchip
+ — smart TVs, smart home appliances, HVAC systems, wearables, and micro
+ computer boards.
+ Taking advantage of highly programmable and feature-rich interoperability
+ enabled by Kaa, consumer IoT products will allow for hassle-free remote
+ monitoring and control, event-driven operations, user context awareness,
+ and even autonomous cross-device collaboration on specific tasks.
 \end_layout
 
 \begin_layout Standard

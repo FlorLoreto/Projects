@@ -163,7 +163,7 @@ The
 TimeAlarm 
 \emph default
 library, of paramount importance in this project, is very poorly documented
- and it is necessary to be carefull with some points.
+ and it is necessary to be careful with some points.
 \end_layout
 
 \begin_layout Itemize
@@ -255,7 +255,7 @@ handling alarm triggering (duration and intensity of luminous and sound
 \begin_layout Standard
 It is extremely
 \series bold
- impotant 
+ important 
 \series default
 to check that 
 \series bold
@@ -288,7 +288,7 @@ Otherwise there will be problems converting ASCII codes to numbers - if
 \emph on
 New Line
 \emph default
- - or the screen will display strange untelligible symbols - if
+ - or the screen will display strange unintelligible symbols - if
 \emph on
  different baud rates
 \emph default
@@ -439,7 +439,7 @@ and
 \series bold
  16 
 \series default
-are optinals and they control the backlight 
+are optional and they control the backlight 
 \end_layout
 
 \begin_layout Standard
@@ -504,7 +504,7 @@ you will destroy the LCD
 \emph on
 the LCD sees an alternating polarity
 \emph default
- since liquid crystal is a chemical that will electrolyze into its components
+ since liquid crystal is a chemical that will electrolyse into its components
  just like water will go to hydrogen and oxygen,and this destroys the ability
  of the "liquid crystal" to react.
 \end_layout
@@ -514,7 +514,7 @@ LCD displays can work with
 \emph on
 only four DB lines
 \emph default
-, it will only affect the speed that is reduced by half since the eigth
+, it will only affect the speed that is reduced by half since the eight
  bits required to form a character are to be sent as two 4-bit blocks.
 \end_layout
 
@@ -542,7 +542,7 @@ And we keep (apart from digital pins 0 an 1) 6 digital and 6 analogue pins
 
 \begin_layout Standard
 So we can build our project on a small breadboard.
- The new pin assignment takes into account that only the pins labeled with
+ The new pin assignment takes into account that only the pins labelled with
  
 \begin_inset Formula $\sim3,\sim5,\sim6,\sim9,\sim10\;\textrm{y}\;\sim11$
 \end_inset
@@ -556,6 +556,11 @@ analogWrite()
 
 \begin_layout Section
 Reset
+\end_layout
+
+\begin_layout Standard
+The system resetting is handled through interrupts associated to a pin which
+ is sensed by the system.
 \end_layout
 
 \end_body
