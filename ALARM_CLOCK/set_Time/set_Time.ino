@@ -80,46 +80,40 @@ void Alarma() {
 void lightAndSound() {
   Serial.printf("Alarma %d, %d \n", 0, flag);
   Serial.println ("Pre-oye como va mi ritmo");
-  if (reloj.elapsed() <= 5) {
+  currentMillis = millis();
+  if (reloj.elapsed() <= 1) // this prevents the time from being constantly shown.
+  { previousMillis = currentMillis;
+    lcd.setCursor(6, 1);
+    lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+    Serial.printf ("Se ve la hora %d?",hour());
+  }
+  if (reloj.elapsed() <= 2) {
     digitalWrite(redPin, redInt);
     digitalWrite(trecePin, HIGH);
     analogWrite(buzzPin, 127);
     lcd.setCursor(6, 1);
-  lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+    lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
   }
-  else if (reloj.elapsed() > 5 && reloj.elapsed() <= 6) {
+  else if (reloj.elapsed() > 2 && reloj.elapsed() <= 4) {
     digitalWrite(redPin, redInt / 2); digitalWrite(greenPin, greenInt / 2);
     digitalWrite(trecePin, LOW);
-    analogWrite(buzzPin, 0);
-    lcd.setCursor(6, 1);
-  lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+    analogWrite(buzzPin, 60);
   }
-  else if (reloj.elapsed() > 6 && reloj.elapsed() <= 11) {
+  else if (reloj.elapsed() > 4 && reloj.elapsed() <= 6) {
     digitalWrite(greenPin, greenInt);
     digitalWrite(redPin, 0);
-    analogWrite(buzzPin, 34);
+    analogWrite(buzzPin, 0);
     digitalWrite(trecePin, HIGH);
-    lcd.setCursor(6, 1);
-  lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+    currentMillis = millis();
   }
-  else if (reloj.elapsed() > 11 && reloj.elapsed() <= 13) {
+  else if (reloj.elapsed() > 6 && reloj.elapsed() <= 8) {
     digitalWrite(greenPin, greenInt / 2); digitalWrite(bluePin, blueInt / 2);
     digitalWrite(redPin, 0);
     analogWrite(buzzPin, 0);
     digitalWrite(trecePin, LOW);
-    lcd.setCursor(6, 1);
-  lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
-  }
-  else if (reloj.elapsed() > 13 && reloj.elapsed() <= 18) {
-    digitalWrite(bluePin, greenInt);
-    digitalWrite(greenPin, 0);
-    analogWrite(buzzPin, 205);
-    digitalWrite(trecePin, LOW);
-    lcd.setCursor(6, 1);
-  lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
-  }
 
-  else if (reloj.elapsed() > 18) {
+  }
+  else if (reloj.elapsed() > 8) {
     Serial.println ("Se acabo, se acabo !");
     reloj.reset();
     flag = 0;
@@ -127,8 +121,9 @@ void lightAndSound() {
     return;//control returns to main loop.
   }
 }
+
 //=== function to collect data throgh serial monitor:  ==================
-void getEntry(String *devol1, int *devol2) {
+void getEntry(String * devol1, int *devol2) {
   String salida = "";
   // Read any serial input
   while (Serial.available() > 0)
@@ -231,16 +226,21 @@ void loop() {
   if (flag == 1) {
     lightAndSound();
   }
+  digitalWrite(trecePin, LOW);
+  digitalWrite(greenPin, 0);
+  digitalWrite(redPin, 0);
+  digitalWrite(bluePin, 0);
+
   //------------------ LCD handling ------------------------------------------
   lcd.setCursor(7, 0);//Position the LCD cursor; that is, set the location at which subsequent text written to the LCD will be displayed.
-  if (Alarm.getTriggeredAlarmId() != 0) {
+  if (Alarm.getTriggeredAlarmId() == AlOnce) {
     lcd.print("ON");
     Serial.printf("alarmtriggered %d \n", Alarm.getTriggeredAlarmId());
   }
   else {
     lcd.print("OFF");
   }
-  
+
   lcd.setCursor(6, 1);
   lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
   //----------------------  Others ----------------------------------------------------
@@ -250,7 +250,9 @@ void loop() {
     Serial.printf ("Fecha: %d-%d-%d. Hora: %d:%d:%d\n", day(), month(), year(), hour(), minute(), second());
     Serial.printf ("Alarma: %d:%d:%d\n", alarmHora, alarmMinuto,  alarmSegundo);
     Serial.print("flag state "); Serial.println(flag);
+    lcd.setCursor(6, 1);
+    lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
   }
-  Alarm.delay(1000);
+  Alarm.delay(0);
 
 }
