@@ -77,7 +77,7 @@ StopWatch reloj(StopWatch::SECONDS);
 //=== function alarm Service : ===========================================
 void Alarma() {
     lcd.setCursor(6, 1);
-    lcd.print(alarmHora); lcd.print(":"); lcd.print(alarmMinuto); lcd.print(":"); lcd.print(alarmSegundo);
+    lcd.print(alarmHora); lcd.print(":"); lcd.print(alarmMinuto); lcd.print(":"); lcd.print(alarmSegundo);lcd.print("     ");
   flag = 1;
   reloj.start();
   
@@ -88,58 +88,58 @@ void lightAndSound() {
   Serial.printf ("Se ve la hora %d?", hour());
   
   lcd.setCursor(6, 1);
-      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second()-1);
+      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second()-1);lcd.print("     ");
 
   if (reloj.elapsed() <= 4) {
     
     digitalWrite(redPin, redInt);
     digitalWrite(trecePin, HIGH);
-    //analogWrite(buzzPin, 127);
+    analogWrite(buzzPin, 127);
     if (reloj.elapsed() > 0 && reloj.elapsed() < 1 ) {
      
       lcd.setCursor(6, 1);
-      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());lcd.print("     ");
     }
       if (reloj.elapsed() > 1 && reloj.elapsed() < 2) {
         
       lcd.setCursor(6, 1);
-      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());lcd.print("     ");
     }
     else if (reloj.elapsed() > 2 && reloj.elapsed() < 3) {
      
       lcd.setCursor(6, 1);
-      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());lcd.print("     ");
     }
     else if (reloj.elapsed() > 3 && reloj.elapsed() < 4) {
      
       lcd.setCursor(6, 1);
-      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());lcd.print("     ");
     }
   }
   else if (reloj.elapsed() > 4 && reloj.elapsed() <= 8) {
   
     digitalWrite(redPin, redInt / 2); digitalWrite(greenPin, greenInt / 2);
     digitalWrite(trecePin, LOW);
-    //analogWrite(buzzPin, 60);
+    analogWrite(buzzPin, 60);
     if (reloj.elapsed() > 4 && reloj.elapsed() < 5) {
       
       lcd.setCursor(6, 1);
-      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());lcd.print("     ");
     }
     else if (reloj.elapsed() > 5 && reloj.elapsed() < 6) {
       
       lcd.setCursor(6, 1);
-      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());lcd.print("     ");
     }
     else if (reloj.elapsed() > 6 && reloj.elapsed() < 7) {
      
       lcd.setCursor(6, 1);
-      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());lcd.print("     ");
     }
     else if (reloj.elapsed() > 7 && reloj.elapsed() < 8) {
       
       lcd.setCursor(6, 1);
-      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());lcd.print("     ");
     }
 
   }
@@ -147,50 +147,50 @@ void lightAndSound() {
     
     digitalWrite(greenPin, greenInt);
     digitalWrite(redPin, 0);
-    //analogWrite(buzzPin, 33);
+    analogWrite(buzzPin, 33);
     digitalWrite(trecePin, HIGH);
     currentMillis = millis();
     if (reloj.elapsed() > 9) {
      
       lcd.setCursor(6, 1);
-      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());lcd.print("     ");
     }
     else if (reloj.elapsed() > 10) {
    
       lcd.setCursor(6, 1);
-      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());lcd.print("     ");
     }
     else if (reloj.elapsed() > 11) {
      
       lcd.setCursor(6, 1);
-      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());lcd.print("     ");
     }
   }
   else if (reloj.elapsed() > 12 && reloj.elapsed() <= 16) {
   
     digitalWrite(greenPin, greenInt / 2); digitalWrite(bluePin, blueInt / 2);
     digitalWrite(redPin, 0);
-    //analogWrite(buzzPin, 0);
+    analogWrite(buzzPin, 0);
     digitalWrite(trecePin, LOW);
     if (reloj.elapsed() > 12) {
       
       lcd.setCursor(6, 1);
-      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());lcd.print("     ");
     }
     else if (reloj.elapsed() > 13) {
      
       lcd.setCursor(6, 1);
-      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());lcd.print("     ");
     }
     else if (reloj.elapsed() > 14) {
       
       lcd.setCursor(6, 1);
-      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());lcd.print("     ");
     }
     else if (reloj.elapsed() > 15) {
       
       lcd.setCursor(6, 1);
-      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+      lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());lcd.print("     ");
     }
   }
   else if (reloj.elapsed() > 16) {
@@ -252,7 +252,7 @@ void loop() {
     Serial.print("flag state "); Serial.println(flag);
     liquidClean();
     lcd.setCursor(6, 1);
-    lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+    lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());lcd.print("     ");
   }
   if (flag == 1) {
     lightAndSound();
@@ -262,7 +262,7 @@ void loop() {
     digitalWrite(greenPin, 0);
     digitalWrite(redPin, 0);
     digitalWrite(bluePin, 0);
-    //analogWrite(buzzPin, 0);
+    analogWrite(buzzPin, 0);
     
   }
   //------------------ LCD handling ------------------------------------------

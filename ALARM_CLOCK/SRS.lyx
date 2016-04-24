@@ -997,6 +997,18 @@ Detailed Non-Functional Requirements
 Logical Structure of the Data
 \end_layout
 
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename data.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Security
 \end_layout

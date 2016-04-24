@@ -24,7 +24,7 @@ void setup()
   lcd.print("Alarma "); // this string is 8characters long
   lcd.setCursor(0, 1);
   lcd.print("Hora: ");
-   setTime(8,29, 55,1,1,11); // set time to Saturday 8:29:00am Jan 1 2011
+   setTime(12,40, 24,24,4,16); // set time to Saturday 8:29:00am Jan 1 2011
   // create the alarms 
   Alarm.alarmRepeat(8,30,0, MorningAlarm); 
   timer = 0;
@@ -45,7 +45,7 @@ void loop()
     lcd.print("OFF");
   }
   lcd.setCursor(6, 1);
-  lcd.print(hour());lcd.print(":");lcd.print(minute());lcd.print(":");lcd.print(second());
+  lcd.print(hour());lcd.print(":");lcd.print(minute());lcd.print(":");lcd.print(second());lcd.print("     ");
 
 Alarm.delay(1000);
 }
