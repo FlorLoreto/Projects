@@ -152,6 +152,7 @@ void stringtoNumber(String instruct) {
     hora = HH.toInt();
     minuto = MIN.toInt();
     segundo = SEG.toInt();
+    setTime(hora,minuto,segundo,dia,mes,anyo);
   }
   if (instruct.substring(0, 1) == "3") {
     hh = instruct.substring(1, 3);
@@ -254,13 +255,6 @@ void setup() {
   digitalWrite(redPin, 0);
   digitalWrite(greenPin, 0);
   digitalWrite(bluePin, 0);
-  AlMonday = Alarm.alarmRepeat(dowMonday, alarmHora, alarmMinuto,  alarmSegundo, Alarma0);
-  AlTuesday = Alarm.alarmRepeat(dowTuesday, alarmHora, alarmMinuto,  alarmSegundo, Alarma1);
-  AlWednesday = Alarm.alarmRepeat(dowWednesday, alarmHora, alarmMinuto,  alarmSegundo, Alarma2);
-  AlThursday = Alarm.alarmRepeat(dowThursday, alarmHora, alarmMinuto,  alarmSegundo, Alarma3);
-  AlFriday = Alarm.alarmRepeat(dowFriday, alarmHora, alarmMinuto,  alarmSegundo, Alarma4);
-  AlSaturday = Alarm.alarmRepeat(dowSaturday, alarmHoraWeekEnd, alarmMinutoWeekEnd,  alarmSegundo, Alarma5);
-  AlSunday = Alarm.alarmRepeat(dowSunday, alarmHoraWeekEnd, alarmMinutoWeekEnd,  alarmSegundo, Alarma6);
   printHelp1();          // Print the command list.
   Serial.print ("fecha inicial "); Serial.printf ("%d-%d-%d.\n", day(), month(), year());
   printHelp2();
