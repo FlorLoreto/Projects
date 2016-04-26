@@ -6,22 +6,38 @@
 #include <TimeAlarms.h>
 #include <StopWatch.h>
 #include <LiquidCrystal.h>
+/************  This program examines the TimeAlarm library  *******/
+//===== Libraries included ======================================
+#include <Time.h>
+#include <TimeAlarms.h>
+#include <StopWatch.h>
+#include <LiquidCrystal.h>
+
+//**************** Predsefined constants  *********************
+//................  LED(RGB) pins ..............................
+const int redPin = 3;
+const int greenPin = 5;
+const int bluePin = 4;
+//..................  Pin 13 .....................................
+const int trecePin = 13;
+// ...............  buzzer pin ...................................
+const int buzzPin = 6;
+
+// -----------------  duty cycle --------------------------------
+const int redInt = 254;
+const int greenInt = 127;
+const int blueInt = 254;
+//-------------------  time  ---------------------------------
+long unsigned intervalo = 1000;
+//*****************  selectable variables *********************
 //==================== Variables ===============================
-//---------------  date & alarms -------------------------------
+//---------------  date & time -------------------------------
 int dia;
 int mes ;
 int anyo;
 int hora = 0;
 int minuto = 0;
 int segundo = 0;
-int flag;
-// ---------------- working days alarms -----------------------
-int alarmMinuto;
-int alarmHora;
-int alarmSegundo;
-int alarmHoraWeekEnd;
-int alarmMinutoWeekEnd;
-const int trecePin = 13;
 String DD;
 String MM;
 String AAAA;
@@ -30,31 +46,27 @@ String MIN = "";
 String SEG = "";
 String hh = "";
 String mm = "";
-String serialData = "";
-//................  LEG (RGB) pins ..............................
-const int redPin = 3;
-const int greenPin = 5;
-const int bluePin = 4;
-// ...............  buzzer pin ...................................
-const int buzzPin = 6;
-// -----------------  duty cycle --------------------------------
-const int redInt = 254;
-const int greenInt = 254;
-const int blueInt = 254;
+// ---------------- working days alarms -----------------------
+int alarmHora;
+int alarmMinuto;
+const int alarmSegundo = 10;
+int k = 0;
+// ---------------- weekend alarms ---------------------------
+int decalaje;
+int alarmHoraWeekEnd ;
+int alarmMinutoWeekEnd ;
 // -------------   alarms ID ----------------------------------
 AlarmId AlOnce;
 AlarmId AlMonday;
-AlarmId AlMonday2;
 AlarmId AlTuesday;
 AlarmId AlWednesday;
 AlarmId AlThursday;
 AlarmId AlFriday;
 AlarmId AlSaturday;
 AlarmId AlSunday;
-//------------------- other ------------------
+//------------------- other time related variables------------------
 long unsigned currentMillis;
 long unsigned previousMillis;
-long unsigned intervalo = 1000;
 //--------------  auxiliary -------------------------------------
 char c;
 String instruct = "";
@@ -62,7 +74,9 @@ String input = "";
 int primerNumero = 0;
 String respuesta = "";
 boolean finAjuste = false;
-//--------------  LCD variables  and objects -------------------
+int flag;
+String serialData = "";
+//--------------  LCD variables  -------------------
 //constants for the number of rows and columns in the LCD
 const int numRows = 2;
 const int numCols = 16;
@@ -71,56 +85,88 @@ int count;
 LiquidCrystal lcd(8, 9, 10, 11, 12, 13);
 //-------------  object creation   ------------------------------
 StopWatch reloj(StopWatch::SECONDS);
+/*
 
-//=== function alarm Service : ===========================================
+*/
+//*******************  FUNCTIONS ****************************************
 void Alarma() {
   flag = 1;
   reloj.start();
 }
+
 void lightAndSound() {
   Serial.printf("Alarma %d, %d \n", 0, flag);
   Serial.println ("Pre-oye como va mi ritmo");
-  currentMillis = millis();
-  if (reloj.elapsed() <= 1) // this prevents the time from being constantly shown.
-  { previousMillis = currentMillis;
-    lcd.setCursor(6, 1);
-    lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
-    Serial.printf ("Se ve la hora %d?",hour());
-  }
-  if (reloj.elapsed() <= 2) {
+    if (reloj.elapsed() <= 5) {
     digitalWrite(redPin, redInt);
-    digitalWrite(trecePin, HIGH);
+    digitalWrite(trecePin,HIGH);
     analogWrite(buzzPin, 127);
     lcd.setCursor(6, 1);
     lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+    Serial.println ("oye como va mi ritmo 1");
   }
-  else if (reloj.elapsed() > 2 && reloj.elapsed() <= 4) {
+  else if (reloj.elapsed() > 5 && reloj.elapsed() <= 7) {
     digitalWrite(redPin, redInt / 2); digitalWrite(greenPin, greenInt / 2);
-    digitalWrite(trecePin, LOW);
-    analogWrite(buzzPin, 60);
+    digitalWrite(trecePin, LOW );
+    analogWrite(buzzPin, 0);
+    Serial.println ("oye como va mi ritmo 2");
   }
-  else if (reloj.elapsed() > 4 && reloj.elapsed() <= 6) {
+  else if (reloj.elapsed() > 7 && reloj.elapsed() <= 12) {
     digitalWrite(greenPin, greenInt);
     digitalWrite(redPin, 0);
-    analogWrite(buzzPin, 0);
+    analogWrite(buzzPin, 254);
     digitalWrite(trecePin, HIGH);
-    currentMillis = millis();
-  }
-  else if (reloj.elapsed() > 6 && reloj.elapsed() <= 8) {
-    digitalWrite(greenPin, greenInt / 2); digitalWrite(bluePin, blueInt / 2);
-    digitalWrite(redPin, 0);
-    analogWrite(buzzPin, 0);
-    digitalWrite(trecePin, LOW);
+    Serial.println ("oye como va mi ritmo 3");
+
 
   }
-  else if (reloj.elapsed() > 8) {
+  else if (reloj.elapsed() > 12 && reloj.elapsed() <= 15) {
+    digitalWrite(greenPin, greenInt / 2); digitalWrite(bluePin, blueInt / 2);
+    digitalWrite(redPin, 0);
+    analogWrite(buzzPin, 189);
+    digitalWrite(trecePin,  LOW);
+    Serial.println ("oye como va mi ritmo 4");
+
+  }
+  else if (reloj.elapsed() > 15) {
+    digitalWrite(trecePin, LOW);
+    digitalWrite(greenPin, 0);
+    digitalWrite(bluePin, 0);
+    digitalWrite(redPin, 0);
+    analogWrite(buzzPin, 0);
     Serial.println ("Se acabo, se acabo !");
     reloj.reset();
-    flag = 0;
-    digitalWrite(trecePin, LOW);
+   flag = 0;
     return;//control returns to main loop.
   }
+ }
+
+//=== function1 to print the command list:  ===========================
+void printHelp1() {
+  Serial.println ("Instrucciones para ajustes del calendario");
+  Serial.println ("Calendario: Introduzca el digito '1' y luego en orden y con los digitos indicados");
+  Serial.print ("dia: DD, mes: MM, anyo: AAAA\t");
+  Serial.println ("Termine con un '/' ");
 }
+//=== function2 to print the command list:  ===========================
+void printHelp2() {
+  Serial.println ("Instrucciones para ajustes del reloj");
+  Serial.print ("2. Hora: Introduzca el digito '2' y luego en orden la hora: HH , minutos: MM y segundos: SS\t");
+  Serial.println ("Termine con un '/' ");
+}
+//=== function3 to print the command list:  ===========================
+void printHelp3() {
+  Serial.println ("Instrucciones para ajustes de la alarma dia laborable");
+  Serial.print ("3. Hora: Introduzca el digito '3' y luego en orden la hora: HH y minutos: MM\t");
+  Serial.println ("Termine con un '/' ");
+}
+//=== function4 to print the command list:  ===========================
+void printHelp4() {
+  Serial.println ("Instrucciones para ajustes de la alarma fin de semana");
+  Serial.print ("4. Hora: Introduzca el dígito '4' y luego las horas de decalaje respecto a laborable.\t");
+  Serial.println ("Termine con un '/' ");
+}
+//=== function alarm Service : ===========================================
 
 //=== function to collect data throgh serial monitor:  ==================
 void getEntry(String * devol1, int *devol2) {
@@ -150,13 +196,21 @@ void getEntry(String * devol1, int *devol2) {
           Serial.print("datos de hora: "); Serial.println(salida.substring(1, 3) + ":" + salida.substring(3, 5) + ":" + salida.substring(5, 7));
           Serial.flush();
           break;
+        case 3 :
+          Serial.print("alarma dia laborable: "); Serial.println(salida.substring(1, 3) + ":" + salida.substring(3, 5) + ":" + alarmSegundo);
+          Serial.flush();
+          break;
+        case 4 :
+          Serial.print("alarma week end: decalaje "); Serial.println(salida.substring(1, 3) + "h:" +  alarmHoraWeekEnd + "m:" + alarmMinutoWeekEnd);
+          Serial.flush();
+          break;
       }
     }
   }
 }
 //=== function convert strings to nuneric :  ====================
 void stringtoNumber(String instruct) {
-  int k;
+
   if (instruct.substring(0, 1) == "1") {
     DD = instruct.substring(1, 3);
     MM = instruct.substring(3, 5);
@@ -165,6 +219,7 @@ void stringtoNumber(String instruct) {
     mes = MM.toInt();
     anyo = AAAA.toInt();
     k = 1;
+
   }
   if (instruct.substring(0, 1) == "2") {
     HH = instruct.substring(1, 3);
@@ -173,27 +228,39 @@ void stringtoNumber(String instruct) {
     hora = HH.toInt();
     minuto = MIN.toInt();
     segundo = SEG.toInt();
-    k = k + 1;
-  }
-  if (k == 2) {// Define end of adjustment, setTime and declare Alarms.
-    finAjuste = true;
+    k = 2;
     setTime(hora, minuto, segundo, dia, mes, anyo);
-    AlOnce = Alarm.alarmRepeat(12, 0, 5, Alarma);
   }
+  if (instruct.substring(0, 1) == "3") {
+    hh = instruct.substring(1, 3);
+    mm = instruct.substring(3, 5);
+    alarmHora = hh.toInt();
+    alarmMinuto = mm.toInt();
+    k = 3;
+    AlMonday =  Alarm.alarmRepeat(dowMonday, alarmHora, alarmMinuto, alarmSegundo, Alarma);
+    AlTuesday =  Alarm.alarmRepeat(dowTuesday, alarmHora, alarmMinuto, alarmSegundo, Alarma);
+    AlWednesday =  Alarm.alarmRepeat(dowWednesday, alarmHora, alarmMinuto, alarmSegundo, Alarma);
+    AlThursday =  Alarm.alarmRepeat(dowThursday, alarmHora, alarmMinuto, alarmSegundo, Alarma);
+    AlFriday = Alarm.alarmRepeat(dowFriday, alarmHora, alarmMinuto, alarmSegundo, Alarma);
+
+  }
+  if (instruct.substring(0, 1) == "4") {
+    String decala = instruct.substring(1, 2);
+    decalaje = decala.toInt();
+    alarmMinutoWeekEnd == alarmHora + decalaje;
+alarmMinutoWeekEnd: alarmMinuto;
+    AlSaturday = Alarm.alarmRepeat(dowSaturday, alarmHora, alarmMinuto, alarmSegundo, Alarma);
+    AlSunday = Alarm.alarmRepeat(dowSunday, alarmHora, alarmMinuto, alarmSegundo, Alarma);
+    k = 4;
+  }
+  if (k == 4) {// Define end of adjustment, setTime and declare Alarms.
+    finAjuste = true;
+  }
+
 }
-//=== function1 to print the command list:  ===========================
-void printHelp1() {
-  Serial.println ("Instrucciones para ajustes del calendario");
-  Serial.println ("Calendario: Introduzca el digito '1' y luego en orden y con dos digitos");
-  Serial.print ("dia: DD, mes: MM, anyo: AA\t");
-  Serial.println ("Termine con un '/' ");
-}
-//=== function2 to print the command list:  ===========================
-void printHelp2() {
-  Serial.println ("Instrucciones para ajustes del reloj");
-  Serial.print ("2. Hora: Introduzca el digito '2' y luego en orden la hora: HH , minutos: MM y segundos: SS\t");
-  Serial.println ("Termine con un '/' ");
-}
+
+
+
 //---------------- setup ---------------------------------------------
 void setup() {
   while (!Serial);
@@ -203,6 +270,10 @@ void setup() {
   pinMode(redPin, OUTPUT);
   pinMode(greenPin, OUTPUT);
   pinMode(bluePin, OUTPUT);
+  digitalWrite(trecePin, LOW);
+  digitalWrite(greenPin, 0);
+  digitalWrite(redPin, 0);
+  digitalWrite(bluePin, 0);
   //----------- LCD ----------------------------------
   lcd.begin(numCols, numRows);
   lcd.clear();
@@ -212,6 +283,8 @@ void setup() {
   //----------  Initial screen -----------------------
   printHelp1();
   printHelp2();
+  printHelp3();
+  printHelp4();
   Serial.printf ("hora inicial %d: %d: %d y %d-%d-%d\n", hour(), minute(), second(), day(), month(), year());
 }
 //---------------- loop ---------------------------------------------
@@ -225,24 +298,10 @@ void loop() {
   //----------------  Alarm warning with buzzer an RGB LED --------------------
   if (flag == 1) {
     lightAndSound();
+    Serial.printf ("Fecha light & sound: %d-%d-%d. Hora: %d:%d:%d\n", day(), month(), year(), hour(), minute(), second());
+    Serial.print("flag state "); Serial.println(flag);
   }
-  digitalWrite(trecePin, LOW);
-  digitalWrite(greenPin, 0);
-  digitalWrite(redPin, 0);
-  digitalWrite(bluePin, 0);
-
-  //------------------ LCD handling ------------------------------------------
-  lcd.setCursor(7, 0);//Position the LCD cursor; that is, set the location at which subsequent text written to the LCD will be displayed.
-  if (Alarm.getTriggeredAlarmId() == AlOnce) {
-    lcd.print("ON");
-    Serial.printf("alarmtriggered %d \n", Alarm.getTriggeredAlarmId());
-  }
-  else {
-    lcd.print("OFF");
-  }
-
-  lcd.setCursor(6, 1);
-  lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
+    
   //----------------------  Others ----------------------------------------------------
   currentMillis = millis();
   if (currentMillis - previousMillis >= intervalo) // this prevents the time from being constantly shown.
@@ -250,9 +309,7 @@ void loop() {
     Serial.printf ("Fecha: %d-%d-%d. Hora: %d:%d:%d\n", day(), month(), year(), hour(), minute(), second());
     Serial.printf ("Alarma: %d:%d:%d\n", alarmHora, alarmMinuto,  alarmSegundo);
     Serial.print("flag state "); Serial.println(flag);
-    lcd.setCursor(6, 1);
-    lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
-  }
+    }
   Alarm.delay(0);
 
 }
