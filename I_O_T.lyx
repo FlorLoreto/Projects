@@ -1,0 +1,1576 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass book
+\options fleqn,liststotoc,bibtotoc,idxtotoc,BCOR7.5mm,titlepage,tablecaptionabove
+\use_default_options false
+\begin_modules
+logicalmkup
+theorems-starred
+endnotes
+hanging
+minimalistic
+eqs-within-sections
+figs-within-sections
+tabs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\begin_local_layout
+Format 7
+InsetLayout CharStyle:MenuItem
+LyxType               charstyle
+LabelString           menu
+LatexType             command
+LatexName             menuitem
+Font
+Family              Sans
+EndFont
+Preamble
+\newcommand*{\menuitem}[1]{{\sffamily #1}}
+EndPreamble
+End
+\end_local_layout
+\language british
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement h
+\paperfontsize 12
+\spacing single
+\use_hyperref true
+\pdf_title "Manual Personalización de LyX"
+\pdf_author "Equipo LyX"
+\pdf_subject "LyX-documentation Customization"
+\pdf_keywords "LyX, documentation, customization"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen true
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle false
+\pdf_quoted_options "linkcolor=black, citecolor=black, urlcolor=blue, filecolor=blue,pdfpagelayout=OneColumn, pdfnewwindow=true,pdfstartview=XYZ, plainpages=false, pdfpagelabels"
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 0
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\branch OutDated
+\selected 0
+\filename_suffix 0
+\color #ffffff
+\end_branch
+\index Índice
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2.5cm
+\topmargin 2cm
+\rightmargin 2cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle plain
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+The Internet of Things: Prototyping with Arduino
+\end_layout
+
+\begin_layout Section
+The Internet of Things (IOT).
+\end_layout
+
+\begin_layout Standard
+The Internet of Things
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Or 
+\emph on
+Internet of Everything
+\end_layout
+
+\end_inset
+
+ (IoT) is the 
+\emph on
+network of physical objects
+\emph default
+ - devices, vehicles, buildings and other items - 
+\emph on
+embedded with electronics, software, sensors, and network connectivity that
+ enables these objects to communicate, collect and exchange data
+\emph default
+.
+ The Internet of Things allows objects to be sensed and controlled remotely
+ across existing network infrastructure, creating opportunities for more
+ direct integration of the physical world into computer-based systems, and
+ resulting in improved efficiency, accuracy and economic benefit.
+ 
+\end_layout
+
+\begin_layout Standard
+When 
+\emph on
+IoT is augmented with sensors and actuators
+\emph default
+, the technology becomes an instance of the more general class of 
+\emph on
+cyber-physical systems
+\emph default
+, which also encompasses technologies such as smart grids, smart homes,
+ intelligent transportation and smart cities.
+ Each thing is uniquely identifiable through its embedded computing system
+ but is able to interoperate within the existing Internet infrastructure.
+ 
+\end_layout
+
+\begin_layout Standard
+British entrepreneur Kevin Ashton first coined the term in 1999 while working
+ at Auto-ID Labs (originally called Auto-ID centers, referring to a global
+ network of objects connected to radio-frequency identification, or RFID).
+ Typically, IoT is expected to offer advanced connectivity of devices, systems,
+ and services that goes beyond machine-to-machine (M2M) communications and
+ covers a variety of protocols, domains, and applications.
+ The interconnection of these embedded devices (including smart objects),
+ is expected to usher in automation in nearly all fields, while also enabling
+ advanced applications like a Smart Grid, and expanding to the areas such
+ as smart cities.
+\end_layout
+
+\begin_layout Standard
+Published in El País 05.08.2016:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../ARDUINO/tenedor.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is a 
+\emph on
+HAPIfork
+\emph default
+, a member of the 
+\emph on
+IOT
+\emph default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../ARDUINO/happifork.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset href
+LatexCommand href
+target "https://www.hapi.com/product/hapifork"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let's review some of the more important application fields of IOT:
+\end_layout
+
+\begin_layout Subsection
+Electrical Power Networks (Smart Grids).
+\end_layout
+
+\begin_layout Standard
+A 
+\series bold
+\emph on
+smart grid
+\series default
+\emph default
+ is an electrical grid which includes a variety of operational and energy
+ measures including smart meters, smart appliances, renewable energy resources,
+ and energy efficiency resources.
+ Electronic power conditioning and control of the production and distribution
+ of electricity are important aspects of the smart grid.
+\end_layout
+
+\begin_layout Standard
+Smart grid policy is organized in Europe as Smart Grid European Technology
+ Platform.
+ 
+\end_layout
+
+\begin_layout Standard
+Roll-out of smart grid technology also implies a fundamental re-engineering
+ of the electricity services industry, although typical usage of the term
+ is focused on the technical infrastructure
+\end_layout
+
+\begin_layout Standard
+Since the early 
+\begin_inset Formula $\textrm{21{}^{st}}$
+\end_inset
+
+ century, opportunities to take advantage of improvements in electronic
+ communication technology to resolve the limitations and costs of the electrical
+ grid have become apparent.
+ Technological limitations on metering no longer force peak power prices
+ to be averaged out and passed on to all consumers equally.
+ In parallel, growing concerns over environmental damage from fossil-fired
+ power stations has led to a desire to use large amounts of renewable energy.
+ Dominant forms such as wind power and solar power are highly variable,
+ and so the need for more sophisticated control systems became apparent,
+ to facilitate the connection of sources to the otherwise highly controllable
+ grid.
+ Power from photovoltaic cells (and to a lesser extent wind turbines) has
+ also, significantly, called into question the imperative for large, centralised
+ power stations.
+ The rapidly falling costs point to a major change from the centralised
+ grid topology to one that is highly distributed, with power being both
+ generated and consumed right at the limits of the grid.
+ Finally, growing concern over terrorist attack in some countries has led
+ to calls for a more robust energy grid that is less dependent on centralised
+ power stations that were perceived to be potential attack targets.
+\end_layout
+
+\begin_layout Subsection
+Domotics (Smart Homes).
+\end_layout
+
+\begin_layout Standard
+Home automation or Domotics is the use and control of home appliances remotely
+ or automatically.
+ Early home automation began with labour-saving machines like washing machines.
+ Some home automation appliances are stand alone and do not communicate,
+ such as a programmable light switch, while others are part of the internet
+ of things and are networked for remote control and data transfer.
+ Hardware devices can include sensors (like cameras and thermometers), controlle
+rs, actuators (to do things), and communication systems.
+ Remote control can range from a simple remote control to a smartphone with
+ Bluetooth, to a computer on the other side of the world connected by internet.
+ Home automation systems are available which consist of a suite of products
+ designed to work together.
+ These typically connected through Wi-Fi or power line communication to
+ a hub which is then accessed with a software application.
+ Popular applications include thermostats, security systems, blinds, lighting,
+ and door locks.
+ Popular suites of products include 
+\emph on
+X10
+\emph default
+, 
+\emph on
+Z-Wave
+\emph default
+, and 
+\emph on
+Zigbee 
+\emph default
+all of which are incompatible with each other.
+ Home automation is the domestic application of building automation.
+\end_layout
+
+\begin_layout Subsection
+Smart Cities.
+\end_layout
+
+\begin_layout Standard
+A smart city is a urban development vision to integrate multiple information
+ and communication technology (ICT) solutions in a secure fashion to manage
+ a city’s assets,e.g.
+ local departments information systems, schools, libraries, transportation
+ systems, hospitals, power plants, law enforcement, and other community
+ services.
+ The goal of building a smart city is to improve quality of life by using
+ technology to improve the efficiency of services and meet residents’ needs.
+ ICT allows city officials to interact directly with the community and the
+ city infrastructure and to tell what is happening in the city, how the
+ city is evolving, and how to enable a better quality of life.
+ Through the use of real-time systems and sensors, data are collected from
+ citizens and objects - then processed in real-time.
+ The information and knowledge gathered are keys to tackling inefficiency.
+\end_layout
+
+\begin_layout Standard
+ICT is used to enhance quality, performance and interactivity of urban services,
+ to reduce costs and resource consumption and to improve contact between
+ citizens and government.
+ Smart city applications are developed with the goal of improving the management
+ of urban flows and allowing for real time responses to challenges.
+ A smart city may therefore be more prepared to respond to challenges than
+ one with a simple 'transactional' relationship with its citizens.
+\end_layout
+
+\begin_layout Standard
+Other terms that have been used for similar concepts include cyberville,
+ digital city, electronic communities, flexicity, information city, intelligent
+ city, knowledge-based city, MESH city, telecity, teletopia, Ubiquitous
+ city, wired city
+\end_layout
+
+\begin_layout Standard
+Sectors that have been developing smart city technology include government
+ services, transport and traffic management, energy, health care, water,
+ innovative urban agriculture and waste management.
+\end_layout
+
+\begin_layout Standard
+Major technological, economic and environmental changes have generated interest
+ in smart cities, including climate change, economic restructuring, the
+ move to online retail and entertainment, ageing populations, and pressures
+ on public finances.
+ The European Union (EU) has devoted constant efforts to devising a strategy
+ for achieving 'smart' urban growth for its metropolitan city-regions.The
+ EU has developed a range of programmes under ‘Europe’s Digital Agenda
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+target "https://ec.europa.eu/digital-agenda/"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ In 2010, it highlighted its focus on strengthening innovation and investment
+ in ICT services for the purpose of improving public services and quality
+ of life.
+ Examples of Smart City technologies and programs have been implemented
+ in Milton Keynes, Southampton,Amsterdam, Barcelona
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+target "http://smartcity.bcn.cat/en"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ and Stockholm.
+\end_layout
+
+\begin_layout Subsection
+Smart Cars (Vehicular Automation).
+\end_layout
+
+\begin_layout Standard
+Vehicular automation involves the use of mechatronics, artificial intelligence,
+ and multi-agent system to assist a vehicle's operator.
+ These features and the vehicles employing them may be labelled as intelligent
+ or smart.
+ A vehicle using automation for difficult tasks, especially navigation,
+ may be referred to as semi-autonomous.
+ A vehicle relying solely on automation is consequently referred to as robotic
+ or autonomous.
+ After the invention of the integrated circuit, the sophistication of automation
+ technology increased.
+ Manufacturers and researchers subsequently added a variety of automated
+ functions to automobiles and other vehicles.
+\end_layout
+
+\begin_layout Standard
+Here again, the EU has set up a policy framework - 
+\emph on
+The Intelligent Car Initiative
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+target "https://ec.europa.eu/digital-agenda/en/you-your-vehicle-and-technologies"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\emph default
+ - to tie up all activities relating to 'intelligent' automobiles.
+ The term covers all vehicles that are equipped with modern information
+ and communication technologies (ICT) to increase road safety and/or the
+ flow of traffic, or to reduce the environmental impact of road transport.
+ A well-established and widely known 'intelligent' device would be the anti-lock
+ braking system ABS, which prevents the wheels from locking while braking
+ and thus enables the driver keeping the car under control.
+ An example for a more recent system would be the electronic brake assistance
+ which helps the driver brake effectively, or even brakes the car on its
+ own if a collision is imminent and there is no driver reaction at all.
+\end_layout
+
+\begin_layout Section
+Small-scale IOT.
+\end_layout
+
+\begin_layout Standard
+All the initiatives and projects mentioned in the previous paragraph are
+ high-sounding declarations and, of course, we expect them to be working
+ in some years; but, what about those numerous devices that surround us
+ in our everyday life that we hardly know how to control? Who knows how
+ to set and use the many features of a washing machine or an electric oven?
+\end_layout
+
+\begin_layout Standard
+This is particularly true for programmable devices that we program just
+ once - the first time we install them and, what is very common, if for
+ some reason the device settings are lost, we have to reprogram it and,
+ most likely, we won't be able to find the user's guide that came with it.
+ At best, we will find the booklet an reschedule the widget.Otherwise and,
+ if we are fortunate, we will be able to find in Internet some information
+ that will permit us to reset the device or even a pdf of the user's guide.
+\end_layout
+
+\begin_layout Standard
+But this is just the beginning.
+ Can anybody still remember the time and efforts required to schedule a
+ 
+\series bold
+chronothermostat
+\series default
+, for instance?.
+\end_layout
+
+\begin_layout Standard
+Let's take a look at some user´s manuals.
+\end_layout
+
+\begin_layout Paragraph*
+in Spanish.
+\end_layout
+
+\begin_layout Standard
+The user`s guide has eighteen pages and starts by showing to us a schematic
+ of the thermostat: It is full of buttons and we will have to press all
+ of them to restart it!
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/Administrador/Documents/INFORMATICA/ARDUINO/honeywell.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+in English.
+\end_layout
+
+\begin_layout Standard
+What we find is something similar: buttons and more buttons.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/Administrador/Documents/INFORMATICA/ARDUINO/watson.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+In French 
+\end_layout
+
+\begin_layout Standard
+We find more or less the same:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename C:/Users/Administrador/Documents/INFORMATICA/ARDUINO/french.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If we look at an electronic 
+\series bold
+alarm clock
+\series default
+, we find something similar: a lot of buttons and switches that we need
+ to push once and again in order to set time and a alarms.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../ARDUINO/alarmSony.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In this regard, to set date and time we must follow these instructions:
+\end_layout
+
+\begin_layout Paragraph*
+Setting the clock and date
+\end_layout
+
+\begin_layout Standard
+To change the setting manually, follow the procedure from step 1.
+\end_layout
+
+\begin_layout Enumerate
+Press 
+\series bold
+CLOCK
+\series default
+ for more than 2 seconds.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+You will hear a beep and the year will start to flash in the display.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Press 
+\series bold
+\size larger
++
+\series default
+\size default
+ or 
+\series bold
+\size larger
+-
+\size default
+ 
+\series default
+until the correct year appears in the display.
+\end_layout
+
+\begin_layout Enumerate
+Press 
+\series bold
+CLOCK
+\series default
+.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Repeat 
+\series default
+steps 2 and 3 to set the
+\emph on
+ month
+\emph default
+, 
+\emph on
+day
+\emph default
+ and 
+\emph on
+time
+\emph default
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+After setting the time, two short beeps sound and the clock starts from
+ 0 seconds.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Pressing and holding 
+\series bold
+\size larger
++
+\series default
+\size default
+ or 
+\series bold
+\size larger
+–
+\series default
+ 
+\size default
+changes the year, month or day rapidly.
+ When setting the current time, time changes rapidly by 1 minute-increments
+ up to 10 minutes, and then by 10 minute-increments.
+\end_layout
+
+\begin_layout Itemize
+While setting the clock, you must perform each step within 65 seconds, or
+ the clock setting mode will be cancelled.
+\end_layout
+
+\begin_layout Standard
+At least, this model has Automatic DST/ Summer Time adjustment and we do
+ not have to make these seasonal changes.
+\end_layout
+
+\begin_layout Standard
+If we take a look to the programming procedure of a 
+\series bold
+car alarm
+\series default
+ (pretentiously called 
+\emph on
+Vehicle Security System
+\emph default
+), things are even worse:
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Enter programming mode
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+In order to enter the programming mode, you have to follow the procedure
+ below:
+\end_layout
+
+\begin_layout Itemize
+Open the driver’s door, and bonnet.
+\end_layout
+
+\begin_layout Itemize
+Turn the key to IG ON.
+ – Enter the 4 digit PIN code on the LED push button.
+ The blinker will flash 1x every 12 sec, and the LED will remain ON as confirmat
+ion that you have entered the programming mode.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+Select the programming mode
+\series default
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Navigate through the programming mode by turning the ignition key from OFF
+ to ON, so that you can check and modify the following settings:
+\end_layout
+
+\begin_layout Itemize
+Buzzer volume: the volume of the buzzer can be increased or decreased.
+ 
+\end_layout
+
+\begin_layout Itemize
+Automatic door locking: the doors are locked when the key is turned to IG
+ ON, and unlocked when the key is turned to IG OFF.
+ 
+\end_layout
+
+\begin_layout Itemize
+Passive arming: this arms the alarm system automatically without the car
+ being locked.
+ It protects your car in case you forget to lock it.
+ 
+\end_layout
+
+\begin_layout Itemize
+Door Ajar warning: the buzzer will emit 10 beeps to inform the customer
+ that a door was not properly closed when the lock button is pressed.
+ 
+\end_layout
+
+\begin_layout Itemize
+Arming buzzer: activates the buzzer sound when the alarm system is armed/disarme
+d.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+and on and on...
+\end_layout
+
+\begin_layout Standard
+Curiously the car with this complicated alarm - Toyota - is equipped with
+ the sophisticated 
+\emph on
+Mirror Link
+\emph default
+ system
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+target "http://www.mirrorlink.com/"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ that promises: 
+\emph on
+
+\begin_inset Quotes eld
+\end_inset
+
+simply connect any MirrorLink-enabled smartphone to any MirrorLink-enabled
+ vehicle, and take advantage of easier and more responsible access to navigation
+, music and phone apps while you drive.
+ The apps run on the smartphone, but you see them on the dashboard display
+ and hear the audio via the car's speakers.
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+With MirrorLink, huge icons make apps easy to use and you can control navigation
+, music and more as easily as turning on a blinker.
+ Designed for maximum interoperability between a wide range of cars and
+ smartphones, MirrorLink makes connected driving easier, safer and more
+ enjoyable
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+It seems that someone forgot the '
+\emph on
+vehicular security
+\emph default
+'.
+\end_layout
+
+\begin_layout Section
+Purpose and description of the project
+\end_layout
+
+\begin_layout Standard
+After all the foregoing, we conclude that despite the tremendous technological
+ progress in the development and roll-out of ICT most of the electric everyday
+ goods we use work like in the pre-Internet times: by pushing buttons and
+ turning keys.
+ Taking that into account our objective is very humble but, at the same
+ time, very useful if we think of the huge amount of widgets affected:
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+We only attempt to take advantage of some basic developments fostered by
+ the Internet Of Things to make it easier our interaction with products
+ of daily use and, at the same time, to introduce new functionalities that
+ would make them more attractive.
+\end_layout
+
+\begin_layout Standard
+To this end, we should not forget that this subject, though related with
+ computers and electronics, is new to many of us and a certain amount of
+ hands-on training may be required before embarking on major projects.
+\end_layout
+
+\begin_layout Standard
+In this light, we have designed this project as a 
+\emph on
+Bildugsprojekt 
+\emph default
+where we will build 
+\emph on
+prototypes 
+\emph default
+and in which three phases can be distinguished:
+\end_layout
+
+\begin_layout Enumerate
+Initial training phase: when we will launch an initial project based on
+ the Arduino Uno board to develop an Alarm Clock but - inevitably
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Arduino Uno, the most basic board, does cannot communicate with Internet.
+\end_layout
+
+\end_inset
+
+ - ignoring the existence of the IOT.
+\end_layout
+
+\begin_layout Enumerate
+During phase 2, we will try to improve the basic project by using the IOT,
+ what will entail not only adding some networking shields
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Shields are boards that can be plugged on top of the Arduino PCB extending
+ its capabilities.
+\end_layout
+
+\end_inset
+
+ to the Arduino board but also changing the board itself for another with
+ the higher performance now required.
+\end_layout
+
+\begin_layout Enumerate
+Upon completion of the above phases, we will have gained some experience
+ to face more complex projects, and we will select a new Arduino prototyping
+ platform much more suitable for interacting with the Internet world.
+\end_layout
+
+\begin_layout Standard
+As can be seen, 
+\emph on
+scalability - 
+\emph default
+ability to continue to function well when it (or its context) is changed
+ in size or volume in order to meet a user need.
+ Typically, the rescaling is to a larger size or volume.
+ The rescaling can be of the product itself or in the scalable object's
+ movement to a new context (for example, a new platform)
+\emph on
+ - 
+\emph default
+is a key factor in our project.
+\end_layout
+
+\begin_layout Standard
+Let's start by defining the functions of the system we will develop:
+\end_layout
+
+\begin_layout Standard
+Our IOT project has as a goal to develop a MCU-based 
+\emph on
+Alarm Clock
+\emph default
+ prototype which, unlike the one described above, is connected to Internet
+ and this makes it, not only, easier to use for the users but also a more
+ precise time meter since it will be synchronised with Internet time servers.
+ 
+\end_layout
+
+\begin_layout Standard
+The first question we had to address was selecting the project-supporting
+ infrastructure.
+ This involved two decisions:
+\end_layout
+
+\begin_layout Enumerate
+which 
+\emph on
+platform
+\emph default
+ to use and
+\end_layout
+
+\begin_layout Enumerate
+its 
+\emph on
+model
+\emph default
+ and version.
+ 
+\end_layout
+
+\begin_layout Standard
+Over the course of the project, we have found that changes in the requirements
+ make it necessary to upgrade the project infrastructure and it was decided
+ to 
+\emph on
+change the model
+\emph default
+ but 
+\emph on
+keep the platform
+\emph default
+.
+ 
+\end_layout
+
+\begin_layout Standard
+We are aware that the range of platforms available nowadays is very large
+ but, because of time constraints, we have selected the Arduino platform
+ about which we will say a few words.
+\end_layout
+
+\begin_layout Section
+The ARDUINO platform for IOT projects.
+\end_layout
+
+\begin_layout Standard
+Probably, 
+\series bold
+ARDUINO
+\series default
+ is the most popular platform is but it has some evident shortcomings.
+ For instance, 
+\end_layout
+
+\begin_layout Itemize
+the IDE is not powerful enough, 
+\end_layout
+
+\begin_layout Itemize
+documentation is poor, 
+\end_layout
+
+\begin_layout Itemize
+the underlying framework uses some C and some C++ features, but are not
+ clearly described.
+ 
+\end_layout
+
+\begin_layout Standard
+Arduino programs may be written in any programming language with a compiler
+ that produces binary machine code.
+ Atmel - the MCUs Arduino uses- provides a development environment for their
+ microcontrollers, AVR Studio and the newer Atmel Studio.
+ The Arduino environment is based on Atmel Atmega microcontrollers.
+ 
+\end_layout
+
+\begin_layout Standard
+The AVR language is a "C" environment for programming Atmel chips.
+ Much of the Arduino language is written with AVR constants and functions
+ and there are many things that are still not easy to accomplish with the
+ Arduino language without using some AVR code
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\series bold
+WINAVR 
+\series default
+is a suite of executable, open source software development tools for the
+ Atmel AVR series of RISC microprocessors hosted on the Windows platform.
+ It includes the GNU GCC compiler for C and C++.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+target "http://sourceforge.net/projects/winavr/ "
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The Arduino project provides the Arduino integrated development environment
+ (IDE), which is a cross-platform application written in the programming
+ language Java.
+ It originated from the IDE for the languages 
+\emph on
+Processing
+\emph default
+ and 
+\emph on
+Wiring
+\emph default
+.
+ It is designed to introduce programming to artists and other newcomers
+ unfamiliar with software development.
+ It includes a code editor with features such as syntax highlighting, brace
+ matching, and automatic indentation, and provides simple one-click mechanism
+ to compile and load programs to an Arduino board.
+ A program written with the IDE for Arduino is called a "
+\emph on
+sketch
+\emph default
+".
+\end_layout
+
+\begin_layout Standard
+The Arduino IDE supports the languages C and C++ using special rules to
+ organize code.
+ The Arduino IDE supplies a software library called 
+\emph on
+Wiring
+\emph default
+ from the 
+\emph on
+Wiring
+\emph default
+ project, which provides many common input and output procedures.
+\end_layout
+
+\begin_layout Standard
+There are a lot of boards available under the ARDUINO and GENUINO labels
+ among which we will point out those we have used more frequently:
+\end_layout
+
+\begin_layout Enumerate
+ARDUINO/GENUINO UNO Rev3
+\end_layout
+
+\begin_layout Enumerate
+ARDUINO/GENUINO Mega 2560 Rev3
+\end_layout
+
+\begin_layout Enumerate
+ARDUINO/GENUINO Yún.
+\end_layout
+
+\begin_layout Standard
+Whose specs are compared on the following table
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+In the Yún, if more memory on the Arduino side is needed then the Bridge
+ library can be used
+\emph on
+ to store information in the AR9331’s memory
+\emph default
+ instead, but it is slower than using the RAM on the ATmega32u4
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename ../ARDUINO/genuinos.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Flash memory
+\series default
+ (RAM) is used to hold program code, and 
+\series bold
+EEPROM
+\series default
+ (Electrically Erasable Read-only Memory) is used to hold persistent data.
+ The difference is that you cannot execute code out of EEPROM, and it is
+ awkward for programs to store data in flash.
+ The 
+\series bold
+EEPROM
+\series default
+ area can be used to hold configuration or other data which you want to
+ be available across reboots including if the microcontroller has lost power
+ and is then powered back up.
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+SRAM
+\series default
+ (static RAM) is type of semiconductor memory that uses bistable latching
+ circuitry (flip-flop) to store each bit.
+ SRAM is volatile in the conventional sense that data is eventually lost
+ when the memory is not powered.
+ The term static differentiates SRAM from DRAM (dynamic random-access memory)
+ which must be periodically refreshed.
+ 
+\emph on
+SRAM is faster
+\emph default
+ and more expensive than DRAM.
+\end_layout
+
+\begin_layout Standard
+When writing programs for MCU, local and/or global variables are declared.
+ These 
+\emph on
+variables are saved in
+\emph default
+ SRAM
+\series bold
+ 
+\series default
+as they are variables so their values are going to change during program
+ execution, so they are saved in 
+\emph on
+RAM
+\emph default
+ not flash.
+\end_layout
+
+\begin_layout Standard
+A 
+\series bold
+Bootloader
+\series default
+ is the first program which executes (before the main program) whenever
+ a system is initialized.
+ In PC It is used to boot he OS of the system.
+ In case of 
+\series bold
+microcontrollers
+\series default
+, a bootloader enriches the capabilities of the microcontroller and makes
+ them self programmable device.
+ A bootloader is a small section in the ROM of the controller which executes
+ first when it is initialized but also requires some flash memory.
+\end_layout
+
+\begin_layout Section
+Project description and methodology.
+\end_layout
+
+\begin_layout Standard
+The methodology follows the well-established in in software development
+\emph on
+ waterfall model,
+\emph default
+ i.e., a sequential design process, in which progress is seen as flowing steadily
+ downwards through the phases of 
+\end_layout
+
+\begin_layout Enumerate
+initiation and planning, 
+\end_layout
+
+\begin_layout Enumerate
+requirement analysis, 
+\end_layout
+
+\begin_layout Enumerate
+design and construction,
+\end_layout
+
+\begin_layout Enumerate
+testing, 
+\end_layout
+
+\begin_layout Enumerate
+prototype delivery 
+\end_layout
+
+\begin_layout Section
+Initiation and planning
+\end_layout
+
+\begin_layout Subsection
+Basic project conception and description
+\end_layout
+
+\begin_layout Standard
+We want to develop an 
+\series bold
+\emph on
+alarm clock 
+\series default
+\emph default
+that can be controlled from any computer/device in a domestic LAN/Internet
+ and is synchronised with an Intenet time server.
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Graphics
+	filename al_clock.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since we have moved from a basic project without network access to higher
+ levels adding more and more functionalities to the previous prototype we
+ shall start with a project that we shall call 
+\series bold
+\emph on
+AlarmClockI
+\series default
+\emph default
+, and that will be followed by 
+\series bold
+\emph on
+AlarmClockII 
+\series default
+and 
+\series bold
+AlarmClockIII.
+\end_layout
+
+\begin_layout Subsection
+Planning
+\end_layout
+
+\begin_layout Standard
+The project has been designed to be developed by just a single person over
+ a four-month period and cares has been taken to guarantee a basic training
+ period for the responsible of the project.
+\end_layout
+
+\begin_layout Subsubsection
+Stage 1: basic training
+\end_layout
+
+\begin_layout Standard
+It spans over 3 weeks and this period is devoted to 
+\end_layout
+
+\begin_layout Enumerate
+Installing the basic software required for the project:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Arduino IDE
+\end_layout
+
+\begin_layout Enumerate
+Additional libraries not installed with the IDE
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Setting the hardware development platform:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\emph on
+Arduino Uno
+\emph default
+ board
+\end_layout
+
+\begin_layout Enumerate
+protoboard
+\end_layout
+
+\begin_layout Enumerate
+electronic components
+\end_layout
+
+\begin_layout Enumerate
+multimeter
+\end_layout
+
+\begin_layout Enumerate
+other tools (tweezers, pigtails,...)
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Hands-on training in different projects involving:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+timers,
+\end_layout
+
+\begin_layout Enumerate
+alarms,
+\end_layout
+
+\begin_layout Enumerate
+interrupt and interrupt requirement services (IRS),
+\end_layout
+
+\begin_layout Enumerate
+debouncing and signal filtering,
+\end_layout
+
+\begin_layout Enumerate
+pull-up resistors,
+\end_layout
+
+\begin_layout Enumerate
+liquid crystal displays,
+\end_layout
+
+\begin_layout Enumerate
+LEDs RGB,
+\end_layout
+
+\begin_layout Enumerate
+buzzers,
+\end_layout
+
+\begin_layout Enumerate
+data sheets collection
+\end_layout
+
+\end_deeper
+\begin_layout Subsubsection
+Stage 2: project definition and apportioning
+\end_layout
+
+\begin_layout Standard
+With the experience gained in the previous stage, an initial idea of the
+ project scope was developed as well as the need to apportion it in in different
+ phases and on distinct Arduino models, what would delay the project beyond
+ the initially desired duration.
+\end_layout
+
+\begin_layout Subsubsection
+Stage 3: requirement analysis
+\end_layout
+
+\begin_layout Subsubsection
+Stage 4: test plan 
+\end_layout
+
+\begin_layout Standard
+Based on the document 
+\emph on
+
+\begin_inset Quotes eld
+\end_inset
+
+Requirements specification for
+\emph default
+ 
+\emph on
+the development of an alarm clock adapted to the Internet of Things
+\begin_inset Quotes erd
+\end_inset
+
+
+\emph default
+ produced in stage 3, a test plan has been drawn up that includes most of
+ the test types used in software engineering:
+\end_layout
+
+\begin_layout Itemize
+unit tests
+\end_layout
+
+\begin_layout Itemize
+integration tests
+\end_layout
+
+\begin_layout Itemize
+functional tests
+\end_layout
+
+\begin_layout Itemize
+system tests 
+\end_layout
+
+\begin_layout Standard
+with the addition of 
+\emph on
+hardware tests
+\emph default
+ that need to be firstly done.
+\end_layout
+
+\begin_layout Subsubsection
+Stage 5: hardware testing
+\end_layout
+
+\begin_layout Itemize
+individual
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+liquid crystal display (LCD)
+\end_layout
+
+\begin_layout Itemize
+LED RGB
+\end_layout
+
+\begin_layout Itemize
+piezoelectric capsule
+\end_layout
+
+\begin_layout Itemize
+switch 
+\end_layout
+
+\begin_layout Itemize
+potentiometer
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+joint testing
+\end_layout
+
+\begin_layout Subsubsection
+Stage 6: Phase 1 
+\end_layout
+
+\begin_layout Itemize
+development of the three main modules:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+initialisation module,
+\end_layout
+
+\begin_layout Itemize
+alarm clock module
+\end_layout
+
+\begin_layout Itemize
+reset button module
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+testing
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+unit testing
+\end_layout
+
+\begin_layout Itemize
+integration testing
+\end_layout
+
+\begin_layout Itemize
+system testing
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+debugging 
+\end_layout
+
+\begin_layout Itemize
+prototype implementation
+\end_layout
+
+\begin_layout Subsubsection
+Stage 7: Phase 2
+\end_layout
+
+\begin_layout Subsubsection
+Stage 8: Phase 3
+\end_layout
+
+\begin_layout Section
+AlarmClockI
+\end_layout
+
+\end_body
+\end_document

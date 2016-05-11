@@ -23,7 +23,7 @@ const int trecePin = 13;
 const int buzzPin = 9;
 const int switchPin = 2;
 const int redInt = 254;
-const int greenInt = 127;
+const int greenInt = 254;
 const int blueInt = 254;
 //---------------  date & time -------------------------------
 String hh = "";
@@ -177,7 +177,7 @@ void lanConnect(String ssid, String pass) {
   reloj.start();
   Serial.println("\nStarting connection to server...");
   Udp.begin(localPort);
-  while (reloj.elapsed() <= 5) // this prevents the time from being constantly shown.
+  while (reloj.elapsed() <= 8) // this prevents the time from being constantly shown.
   { ;
   }
   reloj.reset();
@@ -388,7 +388,7 @@ void Alarma() {
 void lightAndSound() {
   Serial.printf("Alarma %d, %d \n", 0, flag);
   Serial.println ("Pre-oye como va mi ritmo");
-  if (reloj.elapsed() <= 5) {
+  if (reloj.elapsed() <= 7) {
     digitalWrite(redPin, redInt);
     digitalWrite(trecePin, HIGH);
     analogWrite(buzzPin, 127);
@@ -396,7 +396,7 @@ void lightAndSound() {
     lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second());
     Serial.println ("oye como va mi ritmo 1");
   }
-  else if (reloj.elapsed() > 5 && reloj.elapsed() <= 7 ) {
+  else if (reloj.elapsed() > 7 && reloj.elapsed() <= 10 ) {
     digitalWrite(redPin, redInt / 2); digitalWrite(greenPin, greenInt / 2);
     digitalWrite(trecePin, LOW );
     analogWrite(buzzPin, 0);
@@ -404,7 +404,7 @@ void lightAndSound() {
     lcd.setCursor(6, 1);
     lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second()); lcd.print("     ");
   }
-  else if (reloj.elapsed() > 7 && reloj.elapsed() <= 12 ) {
+  else if (reloj.elapsed() > 10 && reloj.elapsed() <= 13 ) {
     digitalWrite(greenPin, greenInt);
     digitalWrite(redPin, 0);
     analogWrite(buzzPin, 254);
@@ -414,7 +414,7 @@ void lightAndSound() {
     lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second()); lcd.print("     ");
 
   }
-  else if (reloj.elapsed() > 12 && reloj.elapsed() <= 15 ) {
+  else if (reloj.elapsed() > 13 && reloj.elapsed() <= 20 ) {
     digitalWrite(greenPin, greenInt / 2); digitalWrite(bluePin, blueInt / 2);
     digitalWrite(redPin, 0);
     analogWrite(buzzPin, 189);
@@ -423,7 +423,16 @@ void lightAndSound() {
     lcd.setCursor(6, 1);
     lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second()); lcd.print("     ");
   }
-  else if (reloj.elapsed() > 15) {
+  else if (reloj.elapsed() > 20 && reloj.elapsed() <= 27 ) {
+    digitalWrite(bluePin, blueInt); digitalWrite(greenPin,0);
+    digitalWrite(redPin, 0);
+    analogWrite(buzzPin, 189);
+    digitalWrite(trecePin,  LOW);
+    Serial.println ("oye como va mi ritmo 4");
+    lcd.setCursor(6, 1);
+    lcd.print(hour()); lcd.print(":"); lcd.print(minute()); lcd.print(":"); lcd.print(second()); lcd.print("     ");
+  }
+  else if (reloj.elapsed() > 27) {
     digitalWrite(trecePin, LOW);
     digitalWrite(greenPin, 0);
     digitalWrite(bluePin, 0);
